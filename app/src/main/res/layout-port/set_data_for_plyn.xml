@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#d4d3d4"
+    android:gravity="center">
+
+    <include
+        layout="@layout/action_bar"/>
+
+
+    <ScrollView
+        android:layout_below="@id/action_bar"
+        android:layout_width="match_parent"
+    android:layout_height="match_parent"
+        android:id="@+id/scrollView2">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Počet úrovní:"
+                android:textColor="#000000"
+                android:id="@+id/text"
+                android:layout_centerHorizontal="true"
+                android:layout_alignTop="@+id/spinner2"
+                android:gravity="center" />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:id="@+id/spinner2"
+                android:spinnerMode="dropdown"
+                android:visibility="visible"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/text" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/centrovac"
+                android:visibility="visible"></RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textview_size"
+                android:id="@+id/textView0"
+                android:text="0. úroveň:"
+                android:textColor="#000000"
+                android:layout_below="@+id/text"
+                android:layout_toLeftOf="@+id/txt0"
+                android:layout_toStartOf="@+id/txt0"
+                android:visibility="visible"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp" />
+
+            <EditText
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/edit_text_size"
+                android:id="@+id/txt0"
+                android:background="@drawable/oval_background"
+                android:maxLength="9"
+                android:focusable="true"
+                android:visibility="visible"
+                android:gravity="center"
+                android:layout_alignLeft="@+id/centrovac"
+                android:layout_alignStart="@+id/centrovac"
+                android:layout_marginLeft="10dp"
+                android:layout_alignBottom="@+id/textView0"
+                android:layout_alignTop="@+id/textView0"
+                android:singleLine="true"
+
+                android:lines="1"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textview_size"
+                android:id="@+id/textView1"
+                android:text="1. úroveň:"
+                android:textColor="#000000"
+                android:visibility="visible"
+                android:layout_below="@+id/textView0"
+                android:layout_alignLeft="@+id/textView0"
+                android:layout_alignStart="@+id/textView0"
+                android:layout_marginBottom="10dp" />
+
+            <EditText
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/edit_text_size"
+                android:id="@+id/txt1"
+                android:background="@drawable/oval_background"
+                android:maxLength="9"
+                android:focusable="true"
+                android:visibility="visible"
+                android:gravity="center"
+                android:layout_alignTop="@+id/textView1"
+                android:layout_alignLeft="@+id/txt0"
+                android:layout_alignStart="@+id/txt0"
+                android:layout_alignBottom="@+id/textView1"
+                android:layout_alignRight="@+id/txt0"
+                android:layout_alignEnd="@+id/txt0"
+                android:singleLine="true"
+
+                android:lines="1"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textview_size"
+                android:id="@+id/textView2"
+                android:text="2. úroveň:"
+                android:textColor="#000000"
+                android:visibility="visible"
+                android:layout_below="@+id/textView1"
+                android:layout_alignLeft="@+id/textView1"
+                android:layout_alignStart="@+id/textView1"
+                android:layout_marginBottom="10dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/edit_text_size"
+                android:id="@+id/txt2"
+                android:background="@drawable/oval_background"
+                android:maxLength="9"
+                android:layout_alignTop="@+id/textView2"
+                android:layout_alignRight="@+id/txt0"
+                android:layout_alignEnd="@+id/txt0"
+                android:layout_alignBottom="@+id/textView2"
+                android:layout_alignLeft="@+id/txt0"
+                android:layout_alignStart="@+id/txt0"
+                android:visibility="visible"
+                android:focusable="true"
+                android:gravity="center"
+                android:singleLine="true"
+
+                android:lines="1"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textview_size"
+                android:id="@+id/textView3"
+                android:text="3. úroveň:"
+                android:textColor="#000000"
+                android:visibility="visible"
+                android:layout_below="@+id/textView2"
+                android:layout_alignLeft="@+id/textView2"
+                android:layout_alignStart="@+id/textView2"
+                android:layout_marginBottom="10dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/edit_text_size"
+                android:id="@+id/txt3"
+                android:background="@drawable/oval_background"
+                android:maxLength="9"
+                android:visibility="visible"
+                android:focusable="true"
+                android:gravity="center"
+                android:layout_alignLeft="@+id/txt2"
+                android:layout_alignStart="@+id/txt2"
+                android:layout_alignBottom="@+id/textView3"
+                android:layout_alignTop="@+id/textView3"
+                android:layout_alignRight="@+id/txt2"
+                android:layout_alignEnd="@+id/txt2"
+                android:singleLine="true"
+
+                android:lines="1"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textview_size"
+                android:id="@+id/textView4"
+                android:text="4. úroveň:"
+                android:textColor="#000000"
+                android:visibility="visible"
+                android:layout_below="@+id/textView3"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:layout_marginBottom="10dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/edit_text_size"
+                android:id="@+id/txt4"
+                android:background="@drawable/oval_background"
+                android:maxLength="9"
+                android:visibility="visible"
+                android:focusable="true"
+                android:gravity="center"
+                android:layout_alignRight="@+id/txt3"
+                android:layout_alignEnd="@+id/txt3"
+                android:layout_alignLeft="@+id/txt3"
+                android:layout_alignStart="@+id/txt3"
+                android:layout_alignBottom="@+id/textView4"
+                android:layout_alignTop="@+id/textView4"
+                android:singleLine="true"
+
+                android:lines="1"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textview_size"
+                android:id="@+id/textView5"
+                android:text="5. úroveň:"
+                android:textColor="#000000"
+                android:visibility="visible"
+                android:layout_below="@+id/textView4"
+                android:layout_alignLeft="@+id/textView4"
+                android:layout_alignStart="@+id/textView4"
+                android:layout_marginBottom="10dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/edit_text_size"
+                android:id="@+id/txt5"
+                android:background="@drawable/oval_background"
+                android:maxLength="9"
+                android:visibility="visible"
+                android:focusable="true"
+                android:gravity="center"
+                android:layout_alignLeft="@+id/txt4"
+                android:layout_alignStart="@+id/txt4"
+                android:layout_alignRight="@+id/txt4"
+                android:layout_alignEnd="@+id/txt4"
+                android:layout_alignBottom="@+id/textView5"
+                android:layout_alignTop="@+id/textView5"
+                android:singleLine="true"
+
+                android:lines="1"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/textView13"
+                android:text="Barva posunu: "
+                android:textColor="#000000"
+                android:visibility="visible"
+                android:layout_below="@+id/textView5"
+                android:layout_alignLeft="@+id/textView5"
+                android:layout_alignStart="@+id/textView5"
+                android:layout_marginBottom="10dp"
+                android:layout_toLeftOf="@+id/imgColorPosun"
+                android:gravity="left" />
+            <View
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:onClick="StartSettingColorPosuvnik"
+                android:visibility="visible"
+                android:layout_alignTop="@+id/textView13"
+                android:layout_alignRight="@+id/txt2"
+                android:layout_alignEnd="@+id/txt2"
+                android:layout_alignBottom="@+id/textView13"
+                android:background="@drawable/color_background"/>
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/imgColorPosun"
+                android:onClick="StartSettingColorPosuvnik"
+                android:visibility="visible"
+                android:layout_alignTop="@+id/textView13"
+                android:layout_alignRight="@+id/txt2"
+                android:layout_alignEnd="@+id/txt2"
+                android:layout_alignBottom="@+id/textView13"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/textView14"
+                android:text="Barva hranic:"
+                android:textColor="#000000"
+                android:visibility="visible"
+                android:layout_below="@+id/textView13"
+                android:layout_alignLeft="@+id/textView13"
+                android:layout_alignStart="@+id/textView13"
+                android:layout_marginBottom="10dp"
+                android:layout_alignRight="@+id/textView13"
+                android:layout_alignEnd="@+id/textView13" />
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:onClick="StartSettingColorPosuvnik"
+                android:visibility="visible"
+                android:layout_alignTop="@+id/textView14"
+                android:layout_alignLeft="@+id/imgColorPosun"
+                android:layout_alignStart="@+id/imgColorPosun"
+                android:layout_alignBottom="@+id/textView14"
+                android:background="@drawable/color_background"/>
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/imgColorHranice"
+                android:onClick="StartSettingColorPosuvnik"
+                android:visibility="visible"
+                android:layout_alignTop="@+id/textView14"
+                android:layout_alignLeft="@+id/imgColorPosun"
+                android:layout_alignStart="@+id/imgColorPosun"
+                android:layout_alignBottom="@+id/textView14"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/textView16"
+                android:text="Barva pozadí: "
+                android:textColor="#000000"
+                android:visibility="visible"
+                android:layout_below="@+id/textView14"
+                android:layout_alignRight="@+id/textView14"
+                android:layout_alignEnd="@+id/textView14"
+                android:layout_alignLeft="@+id/textView14"
+                android:layout_alignStart="@+id/textView14"
+                android:layout_marginBottom="20dp" />
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:onClick="StartSettingColorPosuvnik"
+                android:visibility="visible"
+                android:layout_alignTop="@+id/textView16"
+                android:layout_alignLeft="@+id/imgColorHranice"
+                android:layout_alignStart="@+id/imgColorHranice"
+                android:layout_alignBottom="@+id/textView16"
+                android:background="@drawable/color_background"/>
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/imgColorBackground"
+                android:onClick="StartSettingColorPosuvnik"
+                android:visibility="visible"
+                android:layout_alignTop="@+id/textView16"
+                android:layout_alignLeft="@+id/imgColorHranice"
+                android:layout_alignStart="@+id/imgColorHranice"
+                android:layout_alignBottom="@+id/textView16"/>
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/animGroup"
+                android:layout_below="@+id/sendingGroup"
+                android:layout_alignLeft="@+id/sendingGroup"
+                android:layout_alignStart="@+id/sendingGroup"
+                android:layout_alignRight="@+id/sendingGroup"
+                android:layout_alignEnd="@+id/sendingGroup"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Zapnout animaci vracení"
+                    android:id="@+id/radioBtnAnimBack"
+                    android:textColor="#000000"
+                    android:checked="true"
+                    android:layout_below="@+id/radioBtnStill" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Vypnout animaci vraceni"
+                    android:id="@+id/radioBtnWithoutAnimBack"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="#000000"
+                    android:checked="false"
+                    android:layout_below="@+id/textView16"
+                    android:layout_centerHorizontal="true" />
+
+            </RadioGroup>
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/sendingGroup"
+                android:padding="10dp"
+                android:layout_below="@+id/textView16"
+                android:layout_alignLeft="@+id/textView16"
+                android:layout_alignStart="@+id/textView16"
+                android:layout_alignRight="@+id/imgColorBackground"
+                android:layout_alignEnd="@+id/imgColorBackground">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Posílat při změně"
+                    android:id="@+id/radioBtnChange"
+                    android:textColor="#000000"
+                    android:checked="true"
+                    android:layout_below="@+id/radioBtnStill"
+                    android:layout_centerHorizontal="true" />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Posílat nepřetržitě"
+                android:id="@+id/radioBtnStill"
+                android:textColor="#000000"
+                android:checked="false"
+                android:layout_below="@+id/textView16" />
+
+            </RadioGroup>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Uložit"
+                android:id="@+id/btnSave"
+                android:background="@drawable/oval_background"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/animGroup" />
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

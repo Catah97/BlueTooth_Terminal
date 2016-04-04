@@ -1,0 +1,59 @@
+<resources>
+
+
+    <array name="MenuPhotoUncomplete">
+        <item>Najít zařízení</item>
+        <item>Vytvořit první ovládání</item>
+    </array>
+    <array name="MenuPhoto">
+        <item>Najít zařízení</item>
+        <item>Nastavit ovládání</item>
+    </array>
+
+
+
+    <string name="app_name">BlueTooth_Terminal</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+    <string name="buttonInformation">"
+Nástroj tlačítko funguje jako standartní tlačítko, které při stisknutí odešle jemu přidělený bajt. Ten lze nastavit v kolonce "Bajt" a to buď napsáním jednoho znaku, který bude převeden na bajtovou hodnotu podle tabulky ASCI, HEX (zadáním dvoumístného čisla. např: 0F), nebo napsáním přímo bajtové hodnoty.
+
+V kolonce "text" lze nastavit text, který bude napsán na tlačítku (max. 12 znaků).
+
+Zbývající dvě položky "barva textu" a "barva pozadí" slouží k nastavení barevnosti tlačítka."
+    </string>
+    <string name="switchInformation">"
+        Přepínač má dvě pozice, do kterých může být nastaven. Vypnuto (výchozí pozice) a zapnuto, tyto pozice lze přepínat v ovládacím rozhraní. Přepínač je ideální například pro rozsvícení světla, majáku atd.
+        Do kolonky vypnuto napište bajt, který bude odeslán při přepnutí přepínače do pozice vypnuto.
+        Do kolonky zapnuto napište bajt, který bude odeslán při přepnutí přepínače do pozice zapnuto.
+        Všechny bajty zadávejte buď napsáním jednoho znaku, který bude převeden na bajtovou hodnotu podle tabulky ASCI, HEX (zadáním dvoumístného čisla. např: 0F), nebo napsáním přímo bajtové hodnoty. např: 0010 1010."</string>
+    <string name="seekBarInformation">"
+        Posuvník odesíla číselné hodnoty od nuly do jeho maximální hodnoty, podle jeho polohy na ose. Nula je vlevo a maximální hodnota v pravo, tudíž čím více je posuvník posunutý doprava tím vetší hodnoty odesílá ale nikdy nelze určit jaké hodnoty bude přesně posílat. Posuvník je ideální například na ovládání svítivosti nebo RGB modelu (nastavení maximální hodnoty na 255).
+        Maximální hodnota označuje číselnou (Dekadickou) hodnotu která bude odeslána při posunutí posuvníku na nejvyšší hodnotu. Tato hodnota může být nastavena jen v celých číslech."
+    </string>
+    <string name="poznamkyInformation">"
+        Poznámka funguje jako textové pole, popisující jednotolivé části ovládání, které nemohou být popsány. Může být umístěna kdekoliv, nijak nereaguje na ostatní prvky v ovládání a není určena k jakékoliv interakci s uživatelem.
+        Do položky Text poznámky napište text který bude poznámka zobrazovat.
+        V ostatních kolonkách nastavení poznámky lze nastavit velikot zobrazovaného textu, jeho barva a pozadí."
+    </string>
+    <string name="plynInfomation">"
+        Plyn je nástroj, který posílá bajtové hodnoty podle toho, na jaké z jeho poloh je držen prst. V nastavení lze nastavit počet poloh plynu od 2 do 5 (přičemž je jedna poloha vždy výchozí) a přidělit každé poloze její určitou bajtovou hodnotu, kterou nástroj odešle, při držění prstu na ní. Když je zaplá animace vracení, tak po uvolnění prstu z plynu, se prvek sám vrátí do výchozí polohy (stejně, jako když se pustí plynový pedál v autě). Pokud je animace vracení vypnutá zůstane ve stejném stavu. Když se prst přesune přes hranici jedné polohy na jinou polohu, nástroj bude dále posílat bajtovou hodnotu polohy, na kterou se prst přesunul. V případě že je nastaveno nepřetržité odesílání, bude tento bajt posílán stále dokola, dokud neni překročena další hranice. A proto je ideální pro postupné přídávání výkonu například pro ovládání rychlosti autíčka.
+        Podle nastavení počtu poloh se buď zobrazí nebo zmízí textová pole, do kterých se nastavují bajtové hodnoty pro dané polohy. Všechny bajty zadávejte buď jako jeden znak, který bude převeden pomoci ASCI tabulky, HEX (zadáním dvoumístného čisla. např: 0F), a nebu rovnou bytovou hodnotu např: 0010 1010.
+        Barva posunu nastaví barvu indikace pozice, kde se nachází hodnota plynu (viz obrázek), barva pozadí nastavuje pozadí plynu a barva hranic nastavuje barvu všech hranic mezi polohami.
+        Následující obrázek je popis s nastavením pro 4 polohy."
+    </string>
+    <string name="volantInformation">"
+        Volant je nástroj, který se otačí kolem své osy, a to za místem kde se nachází prst.
+        Rovná pozice je pozice ve které se volant nachází když s ním není zacházeno. Pokud je volant na této pozici potom odesílá bajt který byl nastaven do pole Rovná pozice.
+        Volant se sám vrací po polohy "rovná pozice" po té co z něj uživatel pustí prst a pokud je zapnutá animace vracení. V opačném případě se s ním nic neděje.
+        Dále lze nastavit počet poloh pro natočení volantu. Podle nastavení počtu poloh, zmizí nebo se objeví jednotolivá textová pole a volant se rozdělý na oblasti (viz obrázek). Pokud je volant natočen do jedné z těchto poloh tak posílá bajt který byl pro onu polohu nastaven. Pokud je nastaveno nepřetržité posílání, nástroj posíla tento bajt stále dokola dokud poloha není změněna.
+        Jesltiže je nastaven počet poloh na 3, potom bude rozvžení oblastí vypadat stejně jako na obrázku. Když nastavíme počet oblastí na 2, tak se oblast dvě roztáhne přes oblast 3 a po nastavení počtu oblastí na 1 se oblast jedna roztáhne přes zbylé dvě. Při nastavení pouze jedné polohy volant posílá informace pouze o tom, na kterou stranu je natočen ale ne informaci o kolik stupňů.
+        Všechny bajty zadávejte buď jako jeden znak, který bude převeden pomocí ASCI tabulky, HEX (zadáním dvoumístného čisla. např: 0F), a nebo rovnou bytovou hodnotu např: 0010 1010.
+        Následující obrázek je s nastavením Počet oblastí 3.
+        "</string>
+</resources>

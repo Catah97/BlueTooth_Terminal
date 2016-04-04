@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/mainLayout"
+    tools:context=".MainActivity">
+    <RelativeLayout
+        android:id="@+id/llInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Příchozí bajty"
+            android:id="@+id/txtIn"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+        <ScrollView
+            android:scrollbars="none"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollInput"
+            android:layout_below="@+id/txtIn"
+            android:fillViewport="false"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/txtInputStream"
+                android:gravity="right" />
+        </ScrollView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/llOutput"
+        android:layout_below="@+id/llInput"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:layout_alignParentBottom="true">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:id="@+id/center"
+            android:background="#88333333"
+            android:layout_margin="10dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Odchozí bajty"
+            android:id="@+id/txtOut"
+            android:layout_below="@+id/center"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+        <ScrollView
+            android:scrollbars="none"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollOutput"
+            android:layout_below="@+id/txtOut"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/txtOutputStream"
+                android:gravity="right" />
+        </ScrollView>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/LLkeyboard"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <RelativeLayout
+            android:id="@+id/rltPanel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:background="@drawable/oval_background"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Odeslat"
+                android:id="@+id/btnSend"
+                android:layout_alignParentRight="true" />
+
+            <EditText
+                android:lines="1"
+                android:singleLine="true"
+                android:imeActionLabel="Odeslat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtByte"
+                android:layout_toLeftOf="@+id/btnSend"
+                android:layout_toRightOf="@+id/spnChoose"
+                android:layout_toEndOf="@+id/spnChoose"
+                android:layout_alignTop="@+id/spnChoose"
+                android:layout_alignBottom="@+id/spnChoose" />
+
+            <Spinner
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spnChoose"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignTop="@+id/btnSend"
+                android:spinnerMode="dropdown"
+                android:layout_alignBottom="@+id/btnSend" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/lineraLayoutKeyboard"
+            android:layout_below="@+id/btnSend"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"></LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

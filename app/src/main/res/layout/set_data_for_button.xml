@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#d4d3d4">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Uložit"
+        android:id="@+id/btnSave"
+        android:background="@drawable/oval_background"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="5dp" />
+
+    <include
+        layout="@layout/action_bar"/>
+
+    <ScrollView
+        android:layout_below="@id/action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnSave">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/textview_size"
+        android:text="Text tlačítka:"
+        android:id="@+id/txtPopis"
+        android:textColor="#000000"
+        android:gravity="right"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/textView8"
+        android:layout_alignEnd="@+id/textView8"
+        android:layout_marginBottom="20dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtMax"
+        android:background="@drawable/oval_background"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textSize="@dimen/edit_text_size"
+        android:maxLength="12"
+        android:lines="1"
+        android:layout_toRightOf="@+id/textView6"
+        android:layout_alignBottom="@+id/txtPopis"
+        android:layout_alignTop="@+id/txtPopis"
+        android:layout_alignRight="@+id/txtSize"
+        android:layout_alignEnd="@+id/txtSize"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Barva textu:"
+        android:id="@+id/textView6"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:layout_below="@+id/textView8"
+        android:layout_toLeftOf="@+id/checkBox"
+        android:layout_alignLeft="@+id/textView7"
+        android:layout_alignStart="@+id/textView7"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="10dp"
+        android:gravity="right" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Barva pozadí:"
+        android:id="@+id/textView7"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:layout_below="@+id/textView6"
+        android:layout_toLeftOf="@+id/checkBox"
+        android:layout_toStartOf="@+id/checkBox"
+        android:layout_marginRight="10dp"
+        android:gravity="right" />
+
+
+
+    <CheckBox
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="New CheckBox"
+        android:id="@+id/checkBox"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/textview_size"
+        android:text="Bajt:"
+        android:id="@+id/textView8"
+        android:textColor="#000000"
+        android:gravity="right"
+        android:layout_below="@+id/txtPopis"
+        android:layout_alignRight="@+id/textView6"
+        android:layout_alignEnd="@+id/textView6"
+        android:layout_marginBottom="20dp" />
+
+    <EditText
+        android:maxLength="9"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtSize"
+        android:background="@drawable/oval_background"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textSize="@dimen/edit_text_size"
+
+        android:lines="1"
+        android:layout_alignTop="@+id/textView8"
+        android:layout_alignLeft="@+id/checkBox"
+        android:layout_alignStart="@+id/checkBox"
+        android:layout_alignBottom="@+id/textView8"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp" />
+            <View
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:onClick="StartSettingColorButton"
+                android:layout_alignTop="@+id/textView6"
+                android:layout_alignLeft="@+id/txtSize"
+                android:layout_alignStart="@+id/txtSize"
+                android:layout_alignBottom="@+id/textView6"
+                android:background="@drawable/color_background" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/imgTextColor"
+        android:onClick="StartSettingColorButton"
+        android:layout_alignTop="@+id/textView6"
+        android:layout_alignLeft="@+id/txtSize"
+        android:layout_alignStart="@+id/txtSize"
+        android:layout_alignBottom="@+id/textView6" />
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:onClick="StartSettingColorButton"
+                android:layout_alignTop="@+id/textView7"
+                android:layout_alignLeft="@+id/imgTextColor"
+                android:layout_alignStart="@+id/imgTextColor"
+                android:layout_alignBottom="@+id/textView7"
+                android:background="@drawable/color_background" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/imgBackgroundColor"
+        android:onClick="StartSettingColorButton"
+        android:layout_alignTop="@+id/textView7"
+        android:layout_alignLeft="@+id/imgTextColor"
+        android:layout_alignStart="@+id/imgTextColor"
+        android:layout_alignBottom="@+id/textView7"/>
+        </RelativeLayout>
+</ScrollView>
+</RelativeLayout>

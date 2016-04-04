@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#cccccc">
+
+    <include
+        layout="@layout/action_bar"/>
+
+
+    <ScrollView
+        android:layout_below="@id/action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="10000dp"
+        android:id="@+id/scrollView"
+        android:fillViewport="false">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Počet oblastí:"
+                android:textColor="#000000"
+                android:id="@+id/text"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:layout_alignTop="@+id/spinner" />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:id="@+id/spinner"
+                android:spinnerMode="dropdown"
+                android:visibility="visible"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/text" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Vlevo"
+                android:textColor="#000000"
+                android:id="@+id/textView"
+                android:textSize="15dp"
+                android:layout_alignTop="@+id/txtStupen1"
+                android:layout_toLeftOf="@+id/txtStupen1"
+                android:layout_toStartOf="@+id/txtStupen1"
+                android:layout_marginRight="30dp"
+                android:layout_marginEnd="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Vpravo"
+                android:textColor="#000000"
+                android:id="@+id/textView4"
+                android:textSize="15dp"
+                android:layout_alignTop="@+id/tstStupen11"
+                android:layout_alignLeft="@+id/textView"
+                android:layout_alignStart="@+id/textView" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textview_size"
+                android:text="1. oblast"
+                android:textColor="#000000"
+                android:id="@+id/txtStupen1"
+                android:visibility="visible"
+                android:layout_marginRight="10dp"
+                android:layout_below="@+id/text"
+                android:layout_toLeftOf="@+id/txtVlevo"
+                android:layout_toStartOf="@+id/txtVlevo"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textview_size"
+                android:text="2. oblast"
+                android:textColor="#000000"
+                android:id="@+id/txtStupen2"
+                android:visibility="visible"
+                android:layout_below="@+id/txtStupen1"
+                android:layout_alignLeft="@+id/txtStupen1"
+                android:layout_alignStart="@+id/txtStupen1"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textview_size"
+                android:text="3. oblast"
+                android:textColor="#000000"
+                android:id="@+id/txtStupen3"
+                android:visibility="visible"
+                android:layout_below="@+id/txtStupen2"
+                android:layout_alignLeft="@+id/txtStupen2"
+                android:layout_alignStart="@+id/txtStupen2"
+                android:layout_marginBottom="15dp" />
+
+            <EditText
+                android:maxLength="9"
+                android:layout_width="95dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/edit_text_size"
+
+                android:id="@+id/txtVpravo"
+                android:background="@drawable/oval_background"
+                android:visibility="visible"
+                android:gravity="center"
+                android:singleLine="true"
+
+                android:lines="1"
+                android:layout_alignTop="@+id/tstStupen11"
+                android:layout_alignLeft="@+id/txtVlevo3"
+                android:layout_alignStart="@+id/txtVlevo3"
+                android:layout_alignBottom="@+id/tstStupen11"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp" />
+
+            <EditText
+                android:maxLength="9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/edit_text_size"
+
+                android:id="@+id/txtVpravo2"
+                android:background="@drawable/oval_background"
+                android:visibility="visible"
+                android:layout_alignLeft="@+id/txtVpravo"
+                android:layout_alignStart="@+id/txtVpravo"
+                android:layout_alignRight="@+id/txtVpravo"
+                android:layout_alignEnd="@+id/txtVpravo"
+                android:layout_alignBottom="@+id/tstStupen22"
+                android:layout_alignTop="@+id/tstStupen22"
+                android:gravity="center"
+                android:singleLine="true"
+
+                android:lines="1"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp" />
+
+            <EditText
+                android:maxLength="9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/edit_text_size"
+
+                android:id="@+id/txtVpravo3"
+                android:background="@drawable/oval_background"
+                android:visibility="visible"
+                android:layout_alignLeft="@+id/txtVpravo2"
+                android:layout_alignStart="@+id/txtVpravo2"
+                android:layout_alignRight="@+id/txtVpravo2"
+                android:layout_alignEnd="@+id/txtVpravo2"
+                android:layout_alignTop="@+id/tstStupen33"
+                android:layout_alignBottom="@+id/tstStupen33"
+                android:gravity="center"
+                android:singleLine="true"
+
+                android:lines="1"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp" />
+
+            <EditText
+                android:maxLength="9"
+                android:layout_width="95dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/edit_text_size"
+                android:id="@+id/txtVlevo"
+                android:background="@drawable/oval_background"
+                android:visibility="visible"
+                android:layout_alignBottom="@+id/txtStupen1"
+                android:layout_toRightOf="@+id/center"
+                android:layout_toEndOf="@+id/center"
+                android:layout_alignTop="@+id/txtStupen1"
+                android:gravity="center"
+                android:singleLine="true"
+                android:lines="1"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp" />
+
+            <EditText
+                android:maxLength="9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/edit_text_size"
+                android:id="@+id/txtVlevo2"
+                android:background="@drawable/oval_background"
+                android:layout_alignTop="@+id/txtStupen2"
+                android:layout_alignLeft="@+id/txtVlevo"
+                android:layout_alignStart="@+id/txtVlevo"
+                android:layout_alignRight="@+id/txtVlevo"
+                android:layout_alignEnd="@+id/txtVlevo"
+                android:visibility="visible"
+                android:layout_alignBottom="@+id/txtStupen2"
+                android:gravity="center"
+                android:singleLine="true"
+
+                android:lines="1"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp" />
+
+            <EditText
+                android:maxLength="9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/edit_text_size"
+
+                android:id="@+id/txtVlevo3"
+                android:background="@drawable/oval_background"
+                android:visibility="visible"
+                android:layout_alignBottom="@+id/txtStupen3"
+                android:layout_alignRight="@+id/txtVlevo2"
+                android:layout_alignEnd="@+id/txtVlevo2"
+                android:layout_toRightOf="@+id/center"
+                android:layout_alignLeft="@+id/txtVlevo2"
+                android:layout_alignStart="@+id/txtVlevo2"
+                android:layout_alignTop="@+id/txtStupen3"
+                android:gravity="center"
+                android:singleLine="true"
+
+                android:lines="1"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp" />
+
+
+            <EditText
+                android:maxLength="9"
+                android:layout_width="95dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/edit_text_size"
+
+                android:id="@+id/txtRovne"
+                android:background="@drawable/oval_background"
+                android:gravity="center"
+                android:singleLine="true"
+
+                android:lines="1"
+                android:layout_alignTop="@+id/textView2"
+                android:layout_alignLeft="@+id/txtVpravo3"
+                android:layout_alignStart="@+id/txtVpravo3"
+                android:layout_alignBottom="@+id/textView2"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp" />
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textview_size"
+                android:text="Rovná pozice"
+                android:id="@+id/textView2"
+                android:textColor="#000000"
+                android:layout_below="@+id/space3"
+                android:layout_toLeftOf="@+id/txtRovne"
+                android:layout_toStartOf="@+id/txtRovne"
+                android:layout_marginRight="10dp" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:id="@+id/center"
+                android:layout_alignTop="@+id/txtVpravo3"
+                android:layout_centerHorizontal="true"></RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textview_size"
+                android:text="1. oblast"
+                android:id="@+id/tstStupen11"
+                android:textColor="#000000"
+                android:layout_below="@+id/space2"
+                android:layout_alignLeft="@+id/txtStupen3"
+                android:layout_alignStart="@+id/txtStupen3"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textview_size"
+                android:text="2. oblast"
+                android:id="@+id/tstStupen22"
+                android:layout_alignLeft="@+id/tstStupen11"
+                android:layout_alignStart="@+id/tstStupen11"
+                android:layout_alignRight="@+id/tstStupen11"
+                android:layout_alignEnd="@+id/tstStupen11"
+                android:layout_below="@+id/tstStupen11"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textview_size"
+                android:text="3. oblast"
+                android:id="@+id/tstStupen33"
+                android:layout_below="@+id/tstStupen22"
+                android:layout_alignLeft="@+id/tstStupen22"
+                android:layout_alignStart="@+id/tstStupen22"
+                android:layout_marginBottom="15dp" />
+
+
+
+
+
+
+
+
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/animGroup"
+                android:padding="10dp"
+                android:layout_below="@+id/sendingGroup"
+                android:layout_alignLeft="@+id/sendingGroup"
+                android:layout_alignStart="@+id/sendingGroup"
+                android:layout_alignRight="@+id/sendingGroup"
+                android:layout_alignEnd="@+id/sendingGroup"
+                android:layout_marginBottom="20dp"
+                android:gravity="center">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Zapnout animaci vracení"
+                    android:id="@+id/radioBtnAnimBack"
+                    android:textColor="#000000"
+                    android:checked="true"
+                    android:layout_below="@+id/radioBtnStill"
+                    android:layout_centerHorizontal="true" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Vypnout animaci vraceni"
+                    android:id="@+id/radioBtnWithoutAnimBack"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="#000000"
+                    android:checked="false"
+                    android:layout_below="@+id/textView16"
+                    android:layout_centerHorizontal="true" />
+
+            </RadioGroup>
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/sendingGroup"
+                android:padding="10dp"
+                android:layout_below="@+id/txtRovne"
+                android:layout_alignRight="@+id/txtRovne"
+                android:layout_alignEnd="@+id/txtRovne"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:layout_alignLeft="@+id/textView2"
+                android:layout_alignStart="@+id/textView2">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Posílat při změně"
+                    android:id="@+id/radioBtnChange"
+                    android:textColor="#000000"
+                    android:checked="true"
+                    android:layout_below="@+id/radioBtnStill"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="-3dp" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Posílat nepřetržitě"
+                    android:id="@+id/radioBtnStill"
+                    android:textColor="#000000"
+                    android:checked="false"
+                    android:layout_below="@+id/textView16"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center" />
+
+            </RadioGroup>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Uložit"
+                android:id="@+id/btnSave"
+                android:background="@drawable/oval_background"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/animGroup"
+                android:layout_margin="5dp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_below="@+id/txtStupen3"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/space2"
+                android:layout_marginBottom="15dp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_below="@+id/tstStupen33"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="15dp"
+                android:id="@+id/space3" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

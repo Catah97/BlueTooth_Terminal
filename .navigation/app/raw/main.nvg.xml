@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<navigationModel
+  ns = "http://schemas.android.com?import=com.android.tools.idea.editors.navigation.model.*">
+  <locations  
+    class = "java.util.ArrayList">
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.example.martin.bluetooth_terminal.SetDatabase.Settings.Set_Item_Data_Plyn"/>
+      <point      
+        x = "360"      
+        y = "1624"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.example.martin.bluetooth_terminal.MainScreen"/>
+      <point      
+        x = "3148"      
+        y = "28"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.example.martin.bluetooth_terminal.SetDatabase.Settings.Set_Item_Data_Volant"/>
+      <point      
+        x = "1580"      
+        y = "1692"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.example.martin.bluetooth_terminal.WelcomeScreen.Welcome"/>
+      <point      
+        x = "2944"      
+        y = "1096"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.example.martin.bluetooth_terminal.SetDatabase.Settings.Set_Item_Data_Button"/>
+      <point      
+        x = "2248"      
+        y = "188"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.example.martin.bluetooth_terminal.SetDatabase.ColorSetting"/>
+      <point      
+        x = "120"      
+        y = "284"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.example.martin.bluetooth_terminal.Choose_Device.Choose_Device_Main"/>
+      <point      
+        x = "1616"      
+        y = "296"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.example.martin.bluetooth_terminal.SetDatabase.Set_Control"/>
+      <point      
+        x = "872"      
+        y = "560"/>
+    </statePointEntry>
+  </locations>
+</navigationModel>
