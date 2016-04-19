@@ -154,10 +154,7 @@ public class MainScreen extends AppCompatActivity implements Navigation_Menu_Mai
     private Handler prichoziByty = new Handler(){
         @Override
         public void handleMessage(Message msg) {
-            if (consoleRUN) {
-
                 Console.SetInputText((byte[]) msg.obj);
-            }
         }
     };
 

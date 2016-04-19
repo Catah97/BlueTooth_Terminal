@@ -63,6 +63,8 @@ public class BlueTooth extends Thread {
         Log.d("POslano", msg + "");
         try {
             mmOutStream.write(msg);
+            if (Console.dataOUT.size() >= 500)
+                Console.dataOUT.remove(500);
             Console.dataOUT.add(String.valueOf(msg));
 
         } catch (IOException e) {
@@ -87,7 +89,9 @@ public class BlueTooth extends Thread {
         try {
             mmOutStream.write(buffer);
             int b = Integer.parseInt(msg, 2);
-            Console.dataOUT.add(String.valueOf(b));
+            if (Console.dataOUT.size() >= 500)
+                Console.dataOUT.remove(500);
+            Console.dataOUT.add(String.valueOf(msg));
         } catch (IOException e) {                                                                    /**zde napsat kod který zjistí že zařízení nedostává bajty*/
             }
     }

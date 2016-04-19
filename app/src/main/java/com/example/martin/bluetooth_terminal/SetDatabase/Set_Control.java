@@ -12,6 +12,7 @@ import android.os.Vibrator;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -304,16 +305,16 @@ public class Set_Control extends AppCompatActivity implements Items_menu.Items_m
         rltPlyn1 = (RelativeLayout) findViewById(R.id.rltLayoutPlyn1);
         rltPlyn2 = (RelativeLayout) findViewById(R.id.rltLayoutPlyn2);
 
-        final Switch switch1 = (Switch) findViewById(R.id.switch1);
-        final Switch switch2 = (Switch) findViewById(R.id.switch2);
-        final Switch switch3 = (Switch) findViewById(R.id.switch3);
-        final Switch switch4 = (Switch) findViewById(R.id.switch4);
-        final Switch switch5 = (Switch) findViewById(R.id.switch5);
-        final Switch switch6 = (Switch) findViewById(R.id.switch6);
-        final Switch switch7 = (Switch) findViewById(R.id.switch7);
-        final Switch switch8 = (Switch) findViewById(R.id.switch8);
-        final Switch switch9 = (Switch) findViewById(R.id.switch9);
-        final Switch switch10 = (Switch) findViewById(R.id.switch10);
+        final SwitchCompat switch1 = (SwitchCompat) findViewById(R.id.switch1);
+        final SwitchCompat switch2 = (SwitchCompat) findViewById(R.id.switch2);
+        final SwitchCompat switch3 = (SwitchCompat) findViewById(R.id.switch3);
+        final SwitchCompat switch4 = (SwitchCompat) findViewById(R.id.switch4);
+        final SwitchCompat switch5 = (SwitchCompat) findViewById(R.id.switch5);
+        final SwitchCompat switch6 = (SwitchCompat) findViewById(R.id.switch6);
+        final SwitchCompat switch7 = (SwitchCompat) findViewById(R.id.switch7);
+        final SwitchCompat switch8 = (SwitchCompat) findViewById(R.id.switch8);
+        final SwitchCompat switch9 = (SwitchCompat) findViewById(R.id.switch9);
+        final SwitchCompat switch10 = (SwitchCompat) findViewById(R.id.switch10);
 
         final Button button1 = (Button) findViewById(R.id.button1);
         final Button button2 = (Button) findViewById(R.id.button2);

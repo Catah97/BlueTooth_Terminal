@@ -371,7 +371,7 @@ public class Choose_Device_Main extends AppCompatActivity {
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                RenameDevice.Dialog(Choose_Device_Main.this,savedData.get(position).get("id"),handler);
+                RenameDevice.Dialog(Choose_Device_Main.this,list.get(position).get(mac),handler);
                 return true;
             }
         });
@@ -381,11 +381,25 @@ public class Choose_Device_Main extends AppCompatActivity {
         list.clear();
         savedData.clear();
         Set<BluetoothDevice> pairedDevices = blueTooth.getBondedDevices();
-        if (pairedDevices.size() > 0) {
+        if (pairedDevices.size() == 0 ){
+            Choose_Device_Main.this.deleteDatabase(Konstanty.PAIRED_DEVICES_DATABASE_NAME);
+        }
+        else {
             for (BluetoothDevice device : pairedDevices) {
                 HashMap<String, String> map = new HashMap<>();
-                map.put(jmeno, device.getName());
                 map.put(mac, device.getAddress());
+                String macAdress = "1"+device.getAddress();
+                Cursor nameCr = db.GetID_Data(macAdress);
+                String name;
+                if (nameCr.getCount() == 0){
+                    name = device.getName();
+                    db.PutData(macAdress,name);
+                }
+                else {
+                    nameCr.moveToFirst();
+                    name = nameCr.getString(nameCr.getColumnIndex(Konstanty.DEVICE_NAME));
+                }
+                map.put(name,name);
                 list.add(map);
             }
             SynchozietWithDatabase();
@@ -395,50 +409,30 @@ public class Choose_Device_Main extends AppCompatActivity {
     /**Slouží k nahrání přejmenovaných položek z databáze*/
     private void SynchozietWithDatabase() {
         Cursor cr = db.GetData();
-        if (cr.getCount() == 0) {
-            for (HashMap<String, String> map : list) {
-                db.PutData(map.get(mac), map.get(jmeno));
-            }
+        /**mazání starých položek a přejmenování aktuálních*/
+        while (cr.moveToNext()) {
+            HashMap<String, String> map = new HashMap<>();
+            map.put(mac, cr.getString(cr.getColumnIndex(Konstanty.DEVICE_MAC)));
+            map.put(jmeno, cr.getString(cr.getColumnIndex(Konstanty.DEVICE_NAME)));
+            savedData.add(map);
         }
-        else {
-            /**mazání starých položek a přejmenování aktuálních*/
-            while (cr.moveToNext()) {
-                HashMap<String, String> map = new HashMap<>();
-                map.put("id", cr.getString(cr.getColumnIndex(Konstanty.ID)));
-                map.put(mac, cr.getString(cr.getColumnIndex(Konstanty.DEVICE_MAC)));
-                map.put(jmeno, cr.getString(cr.getColumnIndex(Konstanty.DEVICE_NAME)));
-                savedData.add(map);
-            }
-            for (int i = 0; i < savedData.size(); i++) {
-                boolean check = false;
-                String macAdress = savedData.get(i).get(mac);
+        for (int i = 0; i < savedData.size(); i++) {
+            boolean check = false;
+            String macAdress = savedData.get(i).get(mac).substring(1);
+            if (list.size() != 0) {
                 for (int listPOstion = 0; listPOstion < list.size(); listPOstion++) {
                     HashMap<String, String> pairedInformation = list.get(listPOstion);
                     if (macAdress.equals(pairedInformation.get(mac))) {
                         pairedInformation.put(jmeno, savedData.get(i).get(jmeno));
-                        list.set(listPOstion, pairedInformation);
-                        check = true;
-                        break;
-                    }
-                }
-                /**pokud Mac adresa neni nalezena v seznamu spárovaných zařízení je smazána*/
-                if (!check)
-                    db.DeleteItem(Integer.parseInt(savedData.get(i).get("id")));
-            }
-            for (HashMap<String, String> map : list) {
-                boolean check = false;
-                String macAdress = map.get(mac);
-                for (int listPOstion = 0; listPOstion < savedData.size(); listPOstion++) {
-                    HashMap<String, String> pairedInformation = savedData.get(listPOstion);
-                    if (macAdress.equals(pairedInformation.get(mac))) {
                         check = true;
                         break;
                     }
                 }
                 if (!check)
-                    db.PutData(map.get(mac),map.get(jmeno));
+                    db.DeleteItem("1"+macAdress);
             }
         }
+
 
     }
 }

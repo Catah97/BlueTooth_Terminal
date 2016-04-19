@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.martin.bluetooth_terminal.Other.Methody;
 import com.example.martin.bluetooth_terminal.R;
 
 /**
@@ -88,6 +89,7 @@ public class Welcome extends Activity implements Animation.AnimationListener{
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.welcome);
+        float scale = getResources().getDisplayMetrics().density;
         text = (TextView)findViewById(R.id.txtWelcome);
         RLTswipe = (RelativeLayout) findViewById(R.id.RLTswipe);
         enebleBloueTooth = (LinearLayout) findViewById(R.id.enebla_BlueToothLayout);

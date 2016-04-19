@@ -50,7 +50,7 @@ public class DatabaPairedDevices extends SQLiteOpenHelper {
     }
     public Cursor GetID_Data(String mac){
         SQLiteDatabase database = this.getReadableDatabase();
-        Cursor cr =database.rawQuery("select * from " +Konstanty.PAIRED_DEVICES + " WHERE " + Konstanty.DEVICE_MAC+ " =  "+mac, null);
+        Cursor cr =database.rawQuery("select * from " +Konstanty.PAIRED_DEVICES + " WHERE " + Konstanty.DEVICE_MAC+ " = ?",new String[]{mac});
         return cr;
     }
 
@@ -59,11 +59,11 @@ public class DatabaPairedDevices extends SQLiteOpenHelper {
         SQLiteDatabase databaOperations = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(Konstanty.DEVICE_NAME,name);
-        databaOperations.update(Konstanty.PAIRED_DEVICES,contentValues, Konstanty.ID+" = ?",new String[]{ id  });
+        databaOperations.update(Konstanty.PAIRED_DEVICES,contentValues, Konstanty.DEVICE_MAC+" = ?",new String[]{ id  });
     }
-    public void DeleteItem(int id){
+    public void DeleteItem(String id){
         SQLiteDatabase database = this.getWritableDatabase();
-        database.delete(Konstanty.PAIRED_DEVICES, Konstanty.ID  + "=" + id, null);
+        database.delete(Konstanty.PAIRED_DEVICES, Konstanty.DEVICE_MAC+" = ?",new String[]{ id  });
     }
     public void CloseDatabase(){
         SQLiteDatabase database = this.getWritableDatabase();

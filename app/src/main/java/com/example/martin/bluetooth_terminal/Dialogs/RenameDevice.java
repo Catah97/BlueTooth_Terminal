@@ -32,7 +32,7 @@ public class RenameDevice {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 DatabaPairedDevices db = new DatabaPairedDevices(context);
-                db.Updata(id,input.getText().toString());
+                db.Updata("1"+id,input.getText().toString());
                 Message msg = new Message();
                 msg.arg1 = Konstanty.UPDATE;
                 handler.sendMessage(msg);
