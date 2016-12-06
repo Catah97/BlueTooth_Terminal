@@ -4,6 +4,8 @@ import android.app.Fragment;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
@@ -48,7 +50,8 @@ public class Console extends Fragment implements TextWatcher{
     private float scale;
 
     public static Context context;
-    private boolean HEX,BIN,DEC,landSpace;
+    private boolean HEX,BIN,DEC;
+    private boolean landSpace;
     private EditText txtSend;
     private static LinearLayout LLkeyboard,keyboard;
     private ScrollView scrolIn,scrolOut;
@@ -242,10 +245,33 @@ public class Console extends Fragment implements TextWatcher{
         }
     }
 
-    public static void SetInputText(byte[] prichozi_zprava){
+    public static void SetInputTextStatic(byte[] prichozi_zprava){
         int input = prichozi_zprava[0];
         dataIN.add(String.valueOf(input));
     }
+
+    String text;
+
+    public void SetInputText(byte[] prichozi_zprava){
+        SetInputTextStatic(prichozi_zprava);
+        if (HEX){
+            text = ConvertToHEX(true);
+        }
+        else if (DEC){
+            text = ConvertToDec(true);
+        }
+        else if (BIN){
+            text = ConvertToBIN(true);
+        }
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                inputStream.setText(text);
+            }
+        });
+    }
+
+
     private String ConvertToHEX(boolean in) {
         Collections.reverse(dataIN);
         Collections.reverse(dataOUT);

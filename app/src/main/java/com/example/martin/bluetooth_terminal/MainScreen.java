@@ -47,12 +47,15 @@ import java.util.ArrayList;
  * Tato obrazovka je odsílací obrazovkou, stará se o odesílání dat a přepínáni fragmentů
  */
 
-public class MainScreen extends AppCompatActivity implements Navigation_Menu_Main.NavigationDrawerCallbacks{
+public class MainScreen extends AppCompatActivity implements Navigation_Menu_Main.NavigationDrawerCallbacks, BlueTooth.BlueToothListener{
+
+    private static final String TAG = "MainScreen";
 
     Navigation_Menu_Main navigation_menu;
     BlueTooth blueToothSender;
 
-    Fragment control,console;
+    Fragment control;
+    Console console;
     FragmentTransaction fragmentTransaction;
     static boolean consoleRUN,pripojeno;
     public static int width,height;
@@ -148,13 +151,6 @@ public class MainScreen extends AppCompatActivity implements Navigation_Menu_Mai
                     invalidateOptionsMenu();
             }
 
-        }
-    };
-
-    private Handler prichoziByty = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-                Console.SetInputText((byte[]) msg.obj);
         }
     };
 
@@ -320,7 +316,7 @@ public class MainScreen extends AppCompatActivity implements Navigation_Menu_Mai
             finish();
             return;
         }
-        blueToothSender = new BlueTooth(BlueToothConnection.socket, prichoziByty);
+        blueToothSender = new BlueTooth(BlueToothConnection.socket, this);
         blueToothSender.start();
         final FrameLayout layout = (FrameLayout) findViewById(R.id.container);
         final ViewTreeObserver vto = layout.getViewTreeObserver();
@@ -429,4 +425,18 @@ public class MainScreen extends AppCompatActivity implements Navigation_Menu_Mai
         startActivityForResult(intent, Konstanty.SET_CONTROL);
     }
 
+    @Override
+    public void sendMessage(Message msg) {
+
+    }
+
+    @Override
+    public void incomingBytes(byte[] bytes) {
+        if (consoleRUN){
+            console.SetInputText(bytes);
+        }
+        else {
+            Console.SetInputTextStatic(bytes);
+        }
+    }
 }

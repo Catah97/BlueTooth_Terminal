@@ -351,21 +351,27 @@ public class Choose_Device_Main extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                blueToothConnection = new BlueToothConnection(handler);
-                deviceName = list.get(position).get(jmeno);
-                loadingDialog = ConnectionDialog.LoadingDialog(deviceName, getLayoutInflater(), Choose_Device_Main.this, blueToothConnection);/**vytvoření dialogu*/
-                String adress = list.get(position).get(mac);
-                blueToothConnection.execute(adress); /**zapnutí background workeru*/
-                loadingDialog.show();
-                loadingDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-                    @Override
-                    public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
-                            blueToothConnection.cancel(true);
+                if (blueTooth.isEnabled()) {
+                    blueToothConnection = new BlueToothConnection(handler);
+                    deviceName = list.get(position).get(jmeno);
+                    loadingDialog = ConnectionDialog.LoadingDialog(deviceName, getLayoutInflater(), Choose_Device_Main.this, blueToothConnection);/**vytvoření dialogu*/
+                    String adress = list.get(position).get(mac);
+                    blueToothConnection.execute(adress); /**zapnutí background workeru*/
+                    loadingDialog.show();
+                    loadingDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+                        @Override
+                        public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                            if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+                                blueToothConnection.cancel(true);
+                            }
+                            return true;
                         }
-                        return true;
-                    }
-                });
+                    });
+                }
+                else {
+                    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                    startActivityForResult(enableBtIntent, 2);
+                }
             }
         });
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
