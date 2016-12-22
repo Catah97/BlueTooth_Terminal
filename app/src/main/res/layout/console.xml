@@ -93,7 +93,7 @@
                 android:layout_alignBottom="@+id/spnChoose" />
 
             <Spinner
-                android:layout_width="70dp"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/spnChoose"
                 android:layout_alignParentLeft="true"

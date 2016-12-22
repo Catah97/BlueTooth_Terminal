@@ -41,17 +41,19 @@ public class BlueTooth extends Thread {
     }
     public void run()
     {
-        byte[] buffer = new byte[1024];
+        synchronized (this) {
+            byte[] buffer = new byte[256];
 
-        while (!this.isInterrupted()) {
-            try {
-                int bytes = mmInStream.read(buffer);
-                Log.e("bytes", buffer[0] + "");
-                blueToothListener.incomingBytes(buffer);
-            } catch (IOException e) {
-                e.printStackTrace();
-                Log.e("bluetoothReader", e.getMessage());
-                break;
+            while (!this.isInterrupted()) {
+                try {
+                    int bytes = mmInStream.read(buffer);
+                    Log.e("bytes", buffer[0] + "");
+                    blueToothListener.incomingBytes(buffer);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Log.e("bluetoothReader", e.getMessage());
+                    break;
+                }
             }
         }
     }
@@ -60,13 +62,22 @@ public class BlueTooth extends Thread {
     public static void Send(int msg){
         Log.d("POslano", msg + "");
         try {
-            mmOutStream.write(msg);
+            byte[] buffer = new byte[]{(byte) 0x0, (byte)0x3, (byte)0x0, (byte)0x0};
+            mmOutStream.write(buffer, 0 ,4);
+            //mmOutStream.write(msg);
             if (Console.dataOUT.size() >= 500)
-                Console.dataOUT.remove(500);
+                while (Console.dataOUT.size() > 500) {
+                    Console.dataOUT.remove(500);
+                }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private byte[] createBuffer(int msg){
+        byte[] buffer = new byte[4];
+        return buffer;
     }
 
     public static void Send(String msg) {

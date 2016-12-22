@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import com.example.martin.bluetooth_terminal.BlueTooth.BlueTooth;
 import com.example.martin.bluetooth_terminal.Other.Methody;
+import com.example.martin.bluetooth_terminal.Other.MyMath;
 import com.example.martin.bluetooth_terminal.R;
 
 import java.util.ArrayList;
@@ -246,7 +247,13 @@ public class Console extends Fragment implements TextWatcher{
     }
 
     public static void SetInputTextStatic(byte[] prichozi_zprava){
-        int input = prichozi_zprava[0];
+        int input = 0;
+        for (int i = prichozi_zprava.length - 1; i >= 0; i-- ) {
+            input = input << 8;
+            int incomingByte = prichozi_zprava[i];
+            incomingByte = incomingByte < 0 ? incomingByte & 0xFF : incomingByte;
+            input = input + incomingByte;
+        }
         dataIN.add(String.valueOf(input));
     }
 
@@ -287,7 +294,6 @@ public class Console extends Fragment implements TextWatcher{
                 dec >>= numberOfBitsInAHalfByte;
             }
             while (true){
-
                 if (!hexBuilder.toString().startsWith("0"))
                     break;
                 hexBuilder.delete(0,1);
@@ -321,20 +327,32 @@ public class Console extends Fragment implements TextWatcher{
         String final_string = "";
         for (String s: poleDat) {
             int dec = Integer.parseInt(s);
-            if (dec >= 256){
-                for (int i = 16384; i>0;i-=i/2){
+            if (dec >= 32768){
+                final_string += "Nepodporovaný formát zobrazení pro bin";
+            }
+            else {
+                if (dec >= 256){
+                    int startByte = (int) MyMath.expo(2,15);
+                    for (int i = startByte; i>255; i-=i/2){
+                        if (i == 2048){
+                            final_string += " ";
+                        }
+                        final_string = (dec >= i) ? final_string + "1" : final_string + "0";
+                        dec = (dec >= i) ? dec - i : dec;
+                        if (i == 1)
+                            break;
+                    }
+                    final_string += " | ";
+                }
+                for (int i = (int) MyMath.expo(2,7); i>0; i-=i/2){
+                    if (i == 8){
+                        final_string += " ";
+                    }
                     final_string = (dec >= i) ? final_string + "1" : final_string + "0";
                     dec = (dec >= i) ? dec - i : dec;
                     if (i == 1)
                         break;
                 }
-                final_string += " | ";
-            }
-            for (int i = 128; i>0;i-=i/2){
-                final_string = (dec >= i) ? final_string + "1" : final_string + "0";
-                dec = (dec >= i) ? dec - i : dec;
-                if (i == 1)
-                    break;
             }
             final_string += "\n";
         }
