@@ -47,6 +47,7 @@ public class BlueToothConnection extends AsyncTask<String,Void,Void>{
         try {
             socket = device.createRfcommSocketToServiceRecord(uuid);
             socket.connect();
+            BluetoothBroacastListener.connected = true;
         } catch (IOException e) {
             e.printStackTrace();
             Log.e("socket", e.getMessage());

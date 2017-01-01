@@ -105,14 +105,13 @@
             android:id="@+id/rltPanel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <Button
-
-                android:background="@drawable/oval_background"
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Odeslat"
                 android:id="@+id/btnSend"
-                android:layout_alignParentRight="true" />
+                android:layout_alignParentRight="true"
+                android:src="@drawable/send"
+                android:padding="10dp" />
 
             <EditText
                 android:lines="1"
@@ -128,7 +127,7 @@
                 android:layout_alignBottom="@+id/spnChoose" />
 
             <Spinner
-                android:layout_width="70dp"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/spnChoose"
                 android:layout_alignParentLeft="true"

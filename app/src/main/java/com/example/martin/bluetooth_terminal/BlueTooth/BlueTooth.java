@@ -14,6 +14,9 @@ import com.example.martin.bluetooth_terminal.Other.Methody;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.ByteBuffer;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Created by Martin on 19.08.2015.
@@ -21,6 +24,7 @@ import java.io.OutputStream;
  * využívá se k obousměrné komunikaci mezi zařízeními
  */
 public class BlueTooth extends Thread {
+
     private BluetoothSocket mmSocket;
     private InputStream mmInStream;
     public static OutputStream mmOutStream;
@@ -42,29 +46,52 @@ public class BlueTooth extends Thread {
     public void run()
     {
         synchronized (this) {
-            byte[] buffer = new byte[256];
-
             while (!this.isInterrupted()) {
                 try {
-                    int bytes = mmInStream.read(buffer);
-                    Log.e("bytes", buffer[0] + "");
-                    blueToothListener.incomingBytes(buffer);
+                    int bytesAvailable = mmInStream.available();
+                    if(bytesAvailable > 0)
+                    {
+                        byte[] buffer = new byte[bytesAvailable];
+                        int size = mmInStream.read(buffer);
+                        reverse(buffer);
+                        Log.e("bluetoothReader", "Data size: " + size);
+                        if (bytesAvailable == 1 && buffer[0] == 0) {
+                            Log.e("bluetoothReader", "incoming bad buffuer");
+                        }
+                        else {
+                            blueToothListener.incomingBytes(buffer);
+                        }
+                    }
                 } catch (IOException e) {
-                    e.printStackTrace();
-                    Log.e("bluetoothReader", e.getMessage());
+                    Log.e("bluetoothReader", "error", e);
                     break;
                 }
             }
         }
     }
 
+    public static void reverse(byte[] array) {
+        if (array == null) {
+            return;
+        }
+        int i = 0;
+        int j = array.length - 1;
+        byte tmp;
+        while (j > i) {
+            tmp = array[j];
+            array[j] = array[i];
+            array[i] = tmp;
+            j--;
+            i++;
+        }
+    }
 
     public static void Send(int msg){
         Log.d("POslano", msg + "");
         try {
-            byte[] buffer = new byte[]{(byte) 0x0, (byte)0x3, (byte)0x0, (byte)0x0};
-            mmOutStream.write(buffer, 0 ,4);
-            //mmOutStream.write(msg);
+            byte[] bytes = ByteBuffer.allocate(4).putInt(msg).array();
+            mmOutStream.write(bytes);
+            mmOutStream.flush();
             if (Console.dataOUT.size() >= 500)
                 while (Console.dataOUT.size() > 500) {
                     Console.dataOUT.remove(500);
@@ -75,33 +102,28 @@ public class BlueTooth extends Thread {
         }
     }
 
-    private byte[] createBuffer(int msg){
-        byte[] buffer = new byte[4];
-        return buffer;
-    }
-
     public static void Send(String msg) {
         /**smaže první znak, kterým je 1. Je to tak ,protože při neudělání toho kromu se do databáze uložila špatná hodnota*/
         try {
 
             Log.d("POslano", msg + "");
             msg = msg.substring(1);
-        }
-        catch (Exception ignore){
+        } catch (Exception ignore) {
             Message mesega = new Message();
             mesega.arg1 = -1;
             blueToothListener.sendMessage(mesega);
             return;
         }
-            byte[] buffer = Methody.fromBinary(msg);
+        byte[] buffer = Methody.fromBinary(msg);
         try {
             mmOutStream.write(buffer);
+            mmOutStream.flush();
             int b = Integer.parseInt(msg, 2);
             if (Console.dataOUT.size() >= 500)
                 Console.dataOUT.remove(500);
             Console.dataOUT.add(String.valueOf(b));
         } catch (IOException e) {                                                                    /**zde napsat kod který zjistí že zařízení nedostává bajty*/
-            }
+        }
     }
 
     public static interface BlueToothListener{

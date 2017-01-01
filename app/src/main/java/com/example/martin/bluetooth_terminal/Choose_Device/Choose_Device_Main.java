@@ -70,6 +70,18 @@ public class Choose_Device_Main extends AppCompatActivity {
     private static final String jmeno = "jmeno";
     private static final String mac = "mac";
 
+    private BroadcastReceiver blueToothStatusListener = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(BluetoothAdapter.ACTION_STATE_CHANGED)){
+                int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, -1);
+                if (state == BluetoothAdapter.STATE_ON)
+                {
+                    Start();
+                }
+            }
+        }
+    };
 
     /**Pokud se zařízení spáruje tento Broadcast zařídí přepnutí zpět do activity*/
     private final BroadcastReceiver mHledam = new BroadcastReceiver() {
@@ -311,12 +323,15 @@ public class Choose_Device_Main extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Start();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
+        registerReceiver(blueToothStatusListener, intentFilter);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-
+        unregisterReceiver(blueToothStatusListener);
     }
 
     @Override

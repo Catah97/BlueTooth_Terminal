@@ -4,9 +4,13 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.bluetooth.BluetoothAdapter;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Build;
@@ -31,6 +35,7 @@ import android.widget.Toast;
 
 import com.example.martin.bluetooth_terminal.BlueTooth.BlueTooth;
 import com.example.martin.bluetooth_terminal.BlueTooth.BlueToothConnection;
+import com.example.martin.bluetooth_terminal.BlueTooth.BluetoothBroacastListener;
 import com.example.martin.bluetooth_terminal.Controls.Console;
 import com.example.martin.bluetooth_terminal.Controls.Control;
 import com.example.martin.bluetooth_terminal.Database.DatabaOperations;
@@ -61,6 +66,19 @@ public class MainScreen extends AppCompatActivity implements Navigation_Menu_Mai
     public static int width,height;
 
 
+    private BroadcastReceiver blueToothStatusListener = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(BluetoothAdapter.ACTION_STATE_CHANGED)){
+                int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, -1);
+                if (state == BluetoothAdapter.STATE_TURNING_OFF)
+                {
+                    Dissconnect();
+                    Toast.makeText(context, "Bluetooth bylo vypnuto", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    };
 
     Dialog menuDialog;
 
@@ -237,13 +255,11 @@ public class MainScreen extends AppCompatActivity implements Navigation_Menu_Mai
             alertDialog.setNegativeButton("Ne", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    return;
                 }
             });
             alertDialog.setPositiveButton("Ano", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     Dissconnect();
-                    return;
                 }
             });
             AlertDialog alert = alertDialog.create();
@@ -287,9 +303,12 @@ public class MainScreen extends AppCompatActivity implements Navigation_Menu_Mai
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /**Inizializace listu ukládajíchi zaznam komunikace*/
-        Console.dataOUT = new ArrayList<>();
-        Console.dataIN = new ArrayList<>();
+        if (Console.dataOUT == null){
+            Console.dataOUT = new ArrayList<>();
+        }
+        if (Console.dataIN == null){
+            Console.dataIN = new ArrayList<>();
+        }
         /**připravaní databáze*/
         if (Konstanty.TABLE_NAME.equals("ERROR")) {
             String tablesNames = Save_Load.LoadedData(MainScreen.this, Konstanty.TABLES_FILE);
@@ -332,7 +351,6 @@ public class MainScreen extends AppCompatActivity implements Navigation_Menu_Mai
                 height = layout.getHeight();
                 Control.context = MainScreen.this;
                 Control.handler = handler;
-                Console.context = MainScreen.this;
                 if (consoleRUN){
                     console = new Console();
                     fragmentTransaction = getFragmentManager().beginTransaction().replace(R.id.container, console);
@@ -348,6 +366,29 @@ public class MainScreen extends AppCompatActivity implements Navigation_Menu_Mai
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!BluetoothBroacastListener.connected){
+            Dissconnect();
+        }
+        else {
+            IntentFilter intentFilter = new IntentFilter();
+            intentFilter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
+            registerReceiver(blueToothStatusListener, intentFilter);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        try {
+            unregisterReceiver(blueToothStatusListener);
+        }
+        catch (IllegalArgumentException ignore){
+            //Když neni registrovaný
+        }
+    }
 
     private void SetMemu(String deviceName){
         setContentView(R.layout.main_layout);
@@ -401,6 +442,7 @@ public class MainScreen extends AppCompatActivity implements Navigation_Menu_Mai
     public void onBackPressed() {
         Dissconnect();
     }
+
     private void Dissconnect(){
         if (BlueToothConnection.socket != null) {
             try {

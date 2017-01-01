@@ -1,5 +1,6 @@
 package com.example.martin.bluetooth_terminal.Controls;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Build;
@@ -21,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -33,6 +35,7 @@ import com.example.martin.bluetooth_terminal.Other.Methody;
 import com.example.martin.bluetooth_terminal.Other.MyMath;
 import com.example.martin.bluetooth_terminal.R;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -40,6 +43,8 @@ import java.util.Collections;
  * Created by Martin on 16.01.2016.
  */
 public class Console extends Fragment implements TextWatcher{
+
+    private static final String TAG = "Console";
 
     private static final int sizeOfIntInHalfBytes = 8;
     private static final int numberOfBitsInAHalfByte = 4;
@@ -50,21 +55,27 @@ public class Console extends Fragment implements TextWatcher{
     };
     private float scale;
 
-    public static Context context;
+    public Context context;
     private boolean HEX,BIN,DEC;
     private boolean landSpace;
     private EditText txtSend;
-    private static LinearLayout LLkeyboard,keyboard;
+    private LinearLayout LLkeyboard,keyboard;
     private ScrollView scrolIn,scrolOut;
     private RelativeLayout LLinput,LLOutput,mainLayout;
 
     /**vsechny bity uloyene v desetine podobe*/
-    public static ArrayList<String> dataOUT = new ArrayList<>(), dataIN = new ArrayList<>();
+    public static ArrayList<String> dataOUT, dataIN;
     public static TextView inputStream,outpustStream;
     public boolean showKeyboard = true;
 
     private AnimationKeyboard anim;
     private View rootView;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        context = activity;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -189,8 +200,8 @@ public class Console extends Fragment implements TextWatcher{
                 return false;
             }
         });
-        Button btn = (Button) rootView.findViewById(R.id.btnSend);
-        btn.setOnClickListener(new View.OnClickListener() {
+        ImageView btnSend = (ImageView) rootView.findViewById(R.id.btnSend);
+        btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String s = txtSend.getText().toString();
@@ -204,10 +215,9 @@ public class Console extends Fragment implements TextWatcher{
             /**HEX*/
             try {
                 int i =Integer.parseInt(s,16);
-
+                BlueTooth.Send(i);
                 dataOUT.add(String.valueOf(i));
                 outpustStream.setText(ConvertToHEX(false));
-                BlueTooth.Send(i);
             }
             catch (Exception ignore){
                 Toast.makeText(context,"Špatně zadáná hodnota",Toast.LENGTH_SHORT).show();
@@ -219,9 +229,9 @@ public class Console extends Fragment implements TextWatcher{
             /**DEC*/
             try {
                 int i = Integer.parseInt(s);
+                BlueTooth.Send(i);
                 dataOUT.add(s);
                 outpustStream.setText(ConvertToDec(false));
-                BlueTooth.Send(i);
             }
             catch (Exception ignore){
                 Toast.makeText(context,"Špatně zadáná hodnota",Toast.LENGTH_SHORT).show();
@@ -236,17 +246,19 @@ public class Console extends Fragment implements TextWatcher{
                 String[] pole = s.split(" ");
                 String s1 = pole[0] + pole[1];
                 int b = Integer.parseInt(s1,2);
+                BlueTooth.Send(b);
                 dataOUT.add(String.valueOf(b));
                 outpustStream.setText(ConvertToBIN(false));
-                BlueTooth.Send(b);
             }
             else
                 Toast.makeText(context,"Špatně zadáná hodnota",Toast.LENGTH_SHORT).show();
-
         }
+        txtSend.setText("");
     }
 
     public static void SetInputTextStatic(byte[] prichozi_zprava){
+        //int result = ByteBuffer.wrap(prichozi_zprava).getInt();
+        //Log.e(TAG, "SetInputTextStatic: " + result);
         int input = 0;
         for (int i = prichozi_zprava.length - 1; i >= 0; i-- ) {
             input = input << 8;
@@ -366,6 +378,8 @@ public class Console extends Fragment implements TextWatcher{
         int keyboardHeight = LLkeyboard.getHeight();
         int freeHeight = height - keyboardHeight;
         int itemHeight = freeHeight;
+        inputStream.setText(ConvertToBIN(true));
+        outpustStream.setText(ConvertToBIN(false));
         if (!landSpace) {
             itemHeight = itemHeight / 2;
             ViewGroup.LayoutParams params = LLinput.getLayoutParams();

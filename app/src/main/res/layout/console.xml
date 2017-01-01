@@ -2,6 +2,7 @@
 <RelativeLayout
 
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginBottom="5dp"
     android:layout_marginLeft="@dimen/activity_horizontal_margin"
@@ -71,13 +72,13 @@
             android:id="@+id/rltPanel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <Button
-                android:background="@drawable/oval_background"
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Odeslat"
                 android:id="@+id/btnSend"
-                android:layout_alignParentRight="true" />
+                android:layout_alignParentRight="true"
+                android:src="@drawable/send"
+                android:padding="10dp" />
 
             <EditText
                 android:lines="1"
