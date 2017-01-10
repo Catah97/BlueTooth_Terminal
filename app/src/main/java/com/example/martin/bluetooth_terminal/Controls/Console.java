@@ -10,7 +10,6 @@ import android.os.Looper;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,14 +34,13 @@ import com.example.martin.bluetooth_terminal.Other.Methody;
 import com.example.martin.bluetooth_terminal.Other.MyMath;
 import com.example.martin.bluetooth_terminal.R;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Collections;
 
 /**
  * Created by Martin on 16.01.2016.
  */
-public class Console extends Fragment{
+public class Console extends Fragment implements TextWatcher{
 
     private static final String TAG = "Console";
 
@@ -56,7 +54,7 @@ public class Console extends Fragment{
     private float scale;
 
     public Context context;
-    private boolean HEX,BIN,DEC;
+    private static boolean HEX,BIN,DEC;
     private boolean landSpace;
     private EditText txtSend;
     private LinearLayout LLkeyboard,keyboard;
@@ -109,13 +107,15 @@ public class Console extends Fragment{
         spinerList.add("DEC");
         final Spinner spinner = (Spinner) rootView.findViewById(R.id.spnChoose);
         txtSend = (EditText) rootView.findViewById(R.id.txtByte);
+        txtSend.addTextChangedListener(this);
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, spinerList);
         spinner.setAdapter(adapter);
+        spinner.setSelection(getSelectedPostion());
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 boolean zmena = false;
-                txtSend.setFilters(new InputFilter[] {new InputFilter.LengthFilter(4)});
+                txtSend.setFilters(new InputFilter[] {new InputFilter.LengthFilter(30)});
                 switch (position){
                     //vybráno BIN
                     case 0:
@@ -166,23 +166,23 @@ public class Console extends Fragment{
                     LLkeyboard.startAnimation(anim);
                     final int posunY = txtSend.getHeight();
                     anim.setAnimationListener(new Animation.AnimationListener() {
-                            @Override
-                            public void onAnimationStart(Animation animation) {
-                                if (showKeyboard)
-                                    SetLayout(posunY);
-                            }
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+                            if (showKeyboard)
+                                SetLayout(posunY);
+                        }
 
-                            @Override
-                            public void onAnimationEnd(Animation animation) {
-                                if (!showKeyboard)
-                                    SetLayout(posunY);
-                            }
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            if (!showKeyboard)
+                                SetLayout(posunY);
+                        }
 
-                            @Override
-                            public void onAnimationRepeat(Animation animation) {
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
 
-                            }
-                        });
+                        }
+                    });
                 }
                 txtSend.setText("");
             }
@@ -195,7 +195,10 @@ public class Console extends Fragment{
         txtSend.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                SendData(v.getText().toString());
+                String text = v.getText().toString();
+                if (text.length() != 0) {
+                    SendData(text);
+                }
                 return false;
             }
         });
@@ -204,46 +207,65 @@ public class Console extends Fragment{
             @Override
             public void onClick(View v) {
                 String text = txtSend.getText().toString();
-                String[] field = text.split(" ");
-                for (String s : field) {
-                    SendData(s);
-                }
+                SendData(text);
             }
         });
         return rootView;
     }
-    private void SendData(String s ){
+
+    private int getSelectedPostion(){
+        if (BIN){
+            return 0;
+        }
+        if (HEX){
+            return 1;
+        }
+        if (DEC){
+            return 2;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    private void SendData(String text){
+        try {
+            SendDataOrThrow(text);
+        }
+        catch (IllegalArgumentException ex){
+            Toast.makeText(context,"Špatně zadáná hodnota",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void SendDataOrThrow(String s) throws IllegalArgumentException{
+        String[] splited = s.split(" ");
         if (HEX) {
             /**HEX*/
-            try {
-                int i =Integer.parseInt(s,16);
-                if (i > 255){
+            for (String s1 : splited) {
+                int i = Integer.parseInt(s1, 16);
+                if (i > 255) {
                     throw new IllegalArgumentException("value is large then 255");
                 }
+            }
+            for (String s1 : splited) {
+                int i = Integer.parseInt(s1, 16);
                 BlueTooth.Send(i);
-                outpustStream.setText(ConvertToHEX(false));
             }
-            catch (Exception ignore){
-                Toast.makeText(context,"Špatně zadáná hodnota",Toast.LENGTH_SHORT).show();
-
-            }
-
+            outpustStream.setText(ConvertToHEX(false));
         }
-        else if (DEC){
+        else if (DEC) {
             /**DEC*/
-            try {
-                int i = Integer.parseInt(s);
-                if (i > 255){
+            for (String s1 : splited) {
+                int i = Integer.parseInt(s1);
+                if (i > 255) {
                     throw new IllegalArgumentException("value is large then 255");
                 }
+            }
+            for (String s1 : splited) {
+                int i = Integer.parseInt(s1, 16);
                 BlueTooth.Send(i);
-                outpustStream.setText(ConvertToDec(false));
             }
-            catch (Exception ignore){
-                Toast.makeText(context,"Špatně zadáná hodnota",Toast.LENGTH_SHORT).show();
-
-            }
-
+            outpustStream.setText(ConvertToDec(false));
         }
         else if (BIN){
             /**BIN*/
@@ -259,7 +281,7 @@ public class Console extends Fragment{
                 outpustStream.setText(ConvertToBIN(false));
             }
             else
-                Toast.makeText(context,"Špatně zadáná hodnota",Toast.LENGTH_SHORT).show();
+                throw new IllegalArgumentException("bad bin value: " + s);
         }
         txtSend.setText("");
     }
@@ -267,6 +289,9 @@ public class Console extends Fragment{
     public static void SetInputTextStatic(byte prichozi_zprava) {
         //int result = ByteBuffer.wrap(prichozi_zprava).getInt();
         //Log.e(TAG, "SetInputTextStatic: " + result);
+        if (dataIN.size() > 500){
+            dataIN.remove(500);
+        }
         int input = 0;
         input = input << 8;
         int incomingByte = prichozi_zprava;
@@ -345,7 +370,7 @@ public class Console extends Fragment{
         String final_string = "";
         for (String s: poleDat) {
             int dec = Integer.parseInt(s);
-            if (dec >= 32768){
+            /*if (dec >= 32768){
                 final_string += "Nepodporovaný formát zobrazení pro bin";
             }
             else {
@@ -361,7 +386,7 @@ public class Console extends Fragment{
                             break;
                     }
                     final_string += " | ";
-                }
+                }*/
                 for (int i = (int) MyMath.expo(2,7); i>0; i-=i/2){
                     if (i == 8){
                         final_string += " ";
@@ -371,7 +396,7 @@ public class Console extends Fragment{
                     if (i == 1)
                         break;
                 }
-            }
+            //}
             final_string += "\n";
         }
         Collections.reverse(dataIN);
@@ -414,16 +439,16 @@ public class Console extends Fragment{
         paramsLLoutput.height = (showKeyboard) ? LLOutput.getHeight() - posunY :  LLOutput.getHeight() + posunY;
         LLOutput.setLayoutParams(paramsLLoutput);
         ViewGroup.LayoutParams paramsScrollOut = scrolOut.getLayoutParams();
-            paramsScrollOut.height = (showKeyboard) ? scrolOut.getHeight() - posunY :  scrolOut.getHeight() + posunY;
-            scrolOut.setLayoutParams(paramsScrollOut);
-            if (landSpace) {
-                ViewGroup.LayoutParams paramsScrollIn = scrolIn.getLayoutParams();
-                paramsScrollIn.height =  (showKeyboard) ? scrolIn.getHeight() - posunY :  scrolIn.getHeight() + posunY;
-                scrolIn.setLayoutParams(paramsScrollIn);
-                ViewGroup.LayoutParams params3 = rootView.findViewById(R.id.center).getLayoutParams();
-                params3.height =  (showKeyboard) ? rootView.findViewById(R.id.center).getHeight() - posunY :  rootView.findViewById(R.id.center).getHeight() + posunY;
-                rootView.findViewById(R.id.center).setLayoutParams(params3);
-            }
+        paramsScrollOut.height = (showKeyboard) ? scrolOut.getHeight() - posunY :  scrolOut.getHeight() + posunY;
+        scrolOut.setLayoutParams(paramsScrollOut);
+        if (landSpace) {
+            ViewGroup.LayoutParams paramsScrollIn = scrolIn.getLayoutParams();
+            paramsScrollIn.height =  (showKeyboard) ? scrolIn.getHeight() - posunY :  scrolIn.getHeight() + posunY;
+            scrolIn.setLayoutParams(paramsScrollIn);
+            ViewGroup.LayoutParams params3 = rootView.findViewById(R.id.center).getLayoutParams();
+            params3.height =  (showKeyboard) ? rootView.findViewById(R.id.center).getHeight() - posunY :  rootView.findViewById(R.id.center).getHeight() + posunY;
+            rootView.findViewById(R.id.center).setLayoutParams(params3);
+        }
     }
 
     private void CreateKeyboard() {
@@ -458,6 +483,25 @@ public class Console extends Fragment{
         SetLayout();
     }
 
+    int beforeTXTleng;
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        beforeTXTleng = s.length();
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        if (s.length() == 4 && beforeTXTleng !=5 && BIN) {
+            txtSend.setText(s + " ");
+            txtSend.setSelection(5);
+        }
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
+    }
     private class AnimationKeyboard extends Animation{
 
         float startX,startY,posunY;

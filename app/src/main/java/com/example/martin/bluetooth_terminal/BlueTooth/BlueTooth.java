@@ -53,7 +53,6 @@ public class BlueTooth extends Thread {
                     {
                         byte[] buffer = new byte[bytesAvailable];
                         int size = mmInStream.read(buffer);
-                        reverse(buffer);
                         Log.e("bluetoothReader", "Data size: " + size);
                         for (byte oneByte : buffer){
                             if (oneByte != 0) {
