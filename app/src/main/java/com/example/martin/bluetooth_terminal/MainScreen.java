@@ -284,20 +284,23 @@ public class MainScreen extends AppCompatActivity implements Navigation_Menu_Mai
             fragmentTransaction.commit();
             navigation_menu.SetAdapter();
             invalidateOptionsMenu();
-            if (!consoleRUN) {
-                if (Konstanty.TABLE_ORIENTATION.equals("portail"))
-                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                else
-                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
-            }
-            else
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+            setOrientation();
         }
         if (requestCode == Konstanty.SET_CONTROL && resultCode == RESULT_CANCELED){
             Dissconnect();
         }
     }
 
+    private void setOrientation(){
+        if (!consoleRUN) {
+            if (Konstanty.TABLE_ORIENTATION.equals("portail"))
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            else
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+        }
+        else
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -320,14 +323,7 @@ public class MainScreen extends AppCompatActivity implements Navigation_Menu_Mai
                 Konstanty.TABLE_ORIENTATION = seznamOrientation[0];
             }
         }
-        if (!consoleRUN) {
-            if (Konstanty.TABLE_ORIENTATION.equals("portail"))
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-            else
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
-        }
-        else
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+        setOrientation();
         SetMemu(getIntent().getExtras().getString("device_name"));
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);                       /**zablokování autamitického uspání obrazovky*/
         if (BlueToothConnection.socket == null) {
@@ -446,10 +442,10 @@ public class MainScreen extends AppCompatActivity implements Navigation_Menu_Mai
     private void Dissconnect(){
         if (BlueToothConnection.socket != null) {
             try {
-                BlueToothConnection.socket.close();
                 blueToothSender.interrupt();
                 blueToothSender.join();
                 pripojeno = false;
+                BlueToothConnection.socket.close();
                 Console.dataIN.clear();
                 Console.dataOUT.clear();
                 finish();
@@ -473,7 +469,7 @@ public class MainScreen extends AppCompatActivity implements Navigation_Menu_Mai
     }
 
     @Override
-    public void incomingBytes(byte[] bytes) {
+    public void incomingBytes(byte bytes) {
         if (consoleRUN){
             console.SetInputText(bytes);
         }

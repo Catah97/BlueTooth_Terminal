@@ -42,7 +42,7 @@ import java.util.Collections;
 /**
  * Created by Martin on 16.01.2016.
  */
-public class Console extends Fragment implements TextWatcher{
+public class Console extends Fragment{
 
     private static final String TAG = "Console";
 
@@ -109,7 +109,6 @@ public class Console extends Fragment implements TextWatcher{
         spinerList.add("DEC");
         final Spinner spinner = (Spinner) rootView.findViewById(R.id.spnChoose);
         txtSend = (EditText) rootView.findViewById(R.id.txtByte);
-        txtSend.addTextChangedListener(this);
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, spinerList);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -204,8 +203,11 @@ public class Console extends Fragment implements TextWatcher{
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String s = txtSend.getText().toString();
-                SendData(s);
+                String text = txtSend.getText().toString();
+                String[] field = text.split(" ");
+                for (String s : field) {
+                    SendData(s);
+                }
             }
         });
         return rootView;
@@ -215,8 +217,10 @@ public class Console extends Fragment implements TextWatcher{
             /**HEX*/
             try {
                 int i =Integer.parseInt(s,16);
+                if (i > 255){
+                    throw new IllegalArgumentException("value is large then 255");
+                }
                 BlueTooth.Send(i);
-                dataOUT.add(String.valueOf(i));
                 outpustStream.setText(ConvertToHEX(false));
             }
             catch (Exception ignore){
@@ -229,8 +233,10 @@ public class Console extends Fragment implements TextWatcher{
             /**DEC*/
             try {
                 int i = Integer.parseInt(s);
+                if (i > 255){
+                    throw new IllegalArgumentException("value is large then 255");
+                }
                 BlueTooth.Send(i);
-                dataOUT.add(s);
                 outpustStream.setText(ConvertToDec(false));
             }
             catch (Exception ignore){
@@ -246,8 +252,10 @@ public class Console extends Fragment implements TextWatcher{
                 String[] pole = s.split(" ");
                 String s1 = pole[0] + pole[1];
                 int b = Integer.parseInt(s1,2);
+                if (b > 255){
+                    throw new IllegalArgumentException("value is large then 255");
+                }
                 BlueTooth.Send(b);
-                dataOUT.add(String.valueOf(b));
                 outpustStream.setText(ConvertToBIN(false));
             }
             else
@@ -256,22 +264,20 @@ public class Console extends Fragment implements TextWatcher{
         txtSend.setText("");
     }
 
-    public static void SetInputTextStatic(byte[] prichozi_zprava){
+    public static void SetInputTextStatic(byte prichozi_zprava) {
         //int result = ByteBuffer.wrap(prichozi_zprava).getInt();
         //Log.e(TAG, "SetInputTextStatic: " + result);
         int input = 0;
-        for (int i = prichozi_zprava.length - 1; i >= 0; i-- ) {
-            input = input << 8;
-            int incomingByte = prichozi_zprava[i];
-            incomingByte = incomingByte < 0 ? incomingByte & 0xFF : incomingByte;
-            input = input + incomingByte;
-        }
+        input = input << 8;
+        int incomingByte = prichozi_zprava;
+        incomingByte = incomingByte < 0 ? incomingByte & 0xFF : incomingByte;
+        input = input + incomingByte;
         dataIN.add(String.valueOf(input));
     }
 
     String text;
 
-    public void SetInputText(byte[] prichozi_zprava){
+    public void SetInputText(byte prichozi_zprava){
         SetInputTextStatic(prichozi_zprava);
         if (HEX){
             text = ConvertToHEX(true);
@@ -306,7 +312,7 @@ public class Console extends Fragment implements TextWatcher{
                 dec >>= numberOfBitsInAHalfByte;
             }
             while (true){
-                if (!hexBuilder.toString().startsWith("0"))
+                if (!hexBuilder.toString().startsWith("0") || hexBuilder.length() == 1)
                     break;
                 hexBuilder.delete(0,1);
             }
@@ -452,25 +458,6 @@ public class Console extends Fragment implements TextWatcher{
         SetLayout();
     }
 
-    int beforeTXTleng;
-
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        beforeTXTleng = s.length();
-    }
-
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-        if (s.length() == 4 && beforeTXTleng !=5 && BIN) {
-            txtSend.setText(s + " ");
-            txtSend.setSelection(5);
-        }
-    }
-
-    @Override
-    public void afterTextChanged(Editable s) {
-
-    }
     private class AnimationKeyboard extends Animation{
 
         float startX,startY,posunY;

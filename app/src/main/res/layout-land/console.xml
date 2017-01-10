@@ -12,40 +12,6 @@
 
 
     <RelativeLayout
-        android:id="@+id/llInput"
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content"
-        android:layout_toStartOf="@+id/center"
-        android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/center"
-        android:layout_alignParentBottom="true">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Příchozí bajty"
-            android:id="@+id/txtIn"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-        <ScrollView
-            android:scrollbars="none"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/scrollInput"
-            android:padding="10dp"
-            android:layout_below="@+id/txtIn">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/txtInputStream"
-                android:gravity="right" />
-        </ScrollView>
-    </RelativeLayout>
-    <RelativeLayout
         android:layout_width="1dp"
         android:layout_height="match_parent"
         android:layout_margin="5dp"
@@ -146,4 +112,38 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"></LinearLayout>
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/llInput"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Příchozí bajty (neumí zobrazit 0)"
+            android:id="@+id/txtIn"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+        <ScrollView
+            android:scrollbars="none"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/scrollInput"
+            android:padding="10dp"
+            android:layout_below="@+id/txtIn">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/txtInputStream"
+                android:gravity="right" />
+        </ScrollView>
+    </RelativeLayout>
 </RelativeLayout>

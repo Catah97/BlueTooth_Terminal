@@ -25,8 +25,8 @@ public class SwipeView extends View{
     Paint textOnSwippe,textOnEnd;
 
     final Handler handler;
+    private int viewWidth, viewHeight;
     final int width,height;
-    private int canvasWidth;
     private boolean starBlueTooth;
 
     public Touch swipetouch;
@@ -56,20 +56,26 @@ public class SwipeView extends View{
     @Override
     protected void onDraw(Canvas c) {
         super.onDraw(c);
-        canvasWidth = c.getWidth();
         c.drawARGB(0, 255, 255, 255);
-        border.setBounds(0,0,c.getWidth(),c.getHeight());
+        border.setBounds(0, 0, viewWidth, viewHeight);
         border.draw(c);
         touchpoint.setBounds((int) x,0,(int)(x+width),height);
         touchpoint.draw(c);
-        c.drawText("ON",(int) (c.getWidth()-width+20*scale),(int) (25*scale),textOnEnd);
-        starBlueTooth = ((x+width)>(canvasWidth-(canvasWidth/5)));
+        c.drawText("ON",(int) (viewWidth-width+20*scale),(int) (25*scale),textOnEnd);
+        starBlueTooth = ((x+width)>(viewWidth-(viewWidth/5)));
         if (starBlueTooth)
             c.drawText("ON",(int) (x+20*scale),(int) (25*scale), textOnSwippe);
         else
             c.drawText("OFF",(int) (x+18*scale),(int) (25*scale), textOnSwippe);
     }
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        viewWidth = MeasureSpec.getSize(widthMeasureSpec);
+        viewHeight = MeasureSpec.getSize(heightMeasureSpec);
+        invalidate();
+    }
     public class Touch implements OnTouchListener {
 
         @Override
@@ -85,7 +91,7 @@ public class SwipeView extends View{
                     break;
                 case MotionEvent.ACTION_UP:
                         if (starBlueTooth) {
-                            x = canvasWidth - width;
+                            x = viewWidth - width;
                             invalidate();
                             handler.sendEmptyMessage(10);
                             return false;
@@ -105,7 +111,7 @@ public class SwipeView extends View{
                 return false;
             x = touchX-posun;
             x = (x<0)? 0:x;
-            x = ((x+width)>canvasWidth) ? canvasWidth-width:x;
+            x = ((x+width)>viewWidth) ? viewWidth-width:x;
 
             return true;
         }
@@ -114,7 +120,7 @@ public class SwipeView extends View{
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
             handler.sendEmptyMessage(10);
-            x = canvasWidth-width;
+            x = viewWidth-width;
             invalidate();
             return true;
         }

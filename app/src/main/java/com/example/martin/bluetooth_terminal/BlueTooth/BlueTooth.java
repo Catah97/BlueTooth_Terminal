@@ -55,11 +55,10 @@ public class BlueTooth extends Thread {
                         int size = mmInStream.read(buffer);
                         reverse(buffer);
                         Log.e("bluetoothReader", "Data size: " + size);
-                        if (bytesAvailable == 1 && buffer[0] == 0) {
-                            Log.e("bluetoothReader", "incoming bad buffuer");
-                        }
-                        else {
-                            blueToothListener.incomingBytes(buffer);
+                        for (byte oneByte : buffer){
+                            if (oneByte != 0) {
+                                blueToothListener.incomingBytes(oneByte);
+                            }
                         }
                     }
                 } catch (IOException e) {
@@ -86,6 +85,8 @@ public class BlueTooth extends Thread {
         }
     }
 
+
+
     public static void Send(int msg){
         Log.d("POslano", msg + "");
         try {
@@ -96,9 +97,10 @@ public class BlueTooth extends Thread {
                 while (Console.dataOUT.size() > 500) {
                     Console.dataOUT.remove(500);
                 }
+            Console.dataOUT.add(String.valueOf(msg));
 
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e("BlueTooth", "send error", e);
         }
     }
 
@@ -122,13 +124,15 @@ public class BlueTooth extends Thread {
             if (Console.dataOUT.size() >= 500)
                 Console.dataOUT.remove(500);
             Console.dataOUT.add(String.valueOf(b));
-        } catch (IOException e) {                                                                    /**zde napsat kod který zjistí že zařízení nedostává bajty*/
+        } catch (IOException e) {
+            Log.e("BlueTooth", "send error", e);
+            /**zde napsat kod který zjistí že zařízení nedostává bajty*/
         }
     }
 
     public static interface BlueToothListener{
         void sendMessage(Message msg);
-        void incomingBytes(byte[] bytes);
+        void incomingBytes(byte bytes);
     }
 
 }

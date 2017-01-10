@@ -125,7 +125,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Příchozí bajty"
+            android:text="Příchozí bajty (neumí zobrazit 0)"
             android:id="@+id/txtIn"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
