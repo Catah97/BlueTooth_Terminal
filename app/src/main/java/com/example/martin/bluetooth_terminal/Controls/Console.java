@@ -10,6 +10,7 @@ import android.os.Looper;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,7 +55,7 @@ public class Console extends Fragment implements TextWatcher{
     private float scale;
 
     public Context context;
-    private static boolean HEX,BIN,DEC;
+    private static boolean HEX,BIN,DEC, ASCII;
     private boolean landSpace;
     private EditText txtSend;
     private LinearLayout LLkeyboard,keyboard;
@@ -105,6 +106,7 @@ public class Console extends Fragment implements TextWatcher{
         spinerList.add("BIN");
         spinerList.add("HEX");
         spinerList.add("DEC");
+        spinerList.add("ASCII");
         final Spinner spinner = (Spinner) rootView.findViewById(R.id.spnChoose);
         txtSend = (EditText) rootView.findViewById(R.id.txtByte);
         txtSend.addTextChangedListener(this);
@@ -122,6 +124,7 @@ public class Console extends Fragment implements TextWatcher{
                         HEX = false;
                         DEC = false;
                         BIN = true;
+                        ASCII = false;
                         txtSend.setFilters(new InputFilter[] {new InputFilter.LengthFilter(9)});
                         if (!showKeyboard)
                             zmena = true;
@@ -137,6 +140,7 @@ public class Console extends Fragment implements TextWatcher{
                         HEX = true;
                         DEC = false;
                         BIN = false;
+                        ASCII = false;
                         if (showKeyboard)
                             zmena = true;
                         showKeyboard = false;
@@ -150,6 +154,7 @@ public class Console extends Fragment implements TextWatcher{
                         HEX = false;
                         DEC = true;
                         BIN = false;
+                        ASCII = false;
                         if (showKeyboard)
                             zmena = true;
                         showKeyboard = false;
@@ -158,6 +163,18 @@ public class Console extends Fragment implements TextWatcher{
                             outpustStream.setText(ConvertToDec(false));
                         }catch (Exception ignore){}
                         break;
+                    case 3:
+                        HEX = false;
+                        DEC = false;
+                        BIN = false;
+                        ASCII = true;
+                        if (showKeyboard)
+                            zmena = true;
+                        showKeyboard = false;
+                        try {
+                            inputStream.setText(ConvertToAscii(true));
+                            outpustStream.setText(ConvertToAscii(false));
+                        }catch (Exception ignore){}
                 }
                 if (zmena) {
                     /**Animace pro vyjetí nebo zajeti */
@@ -262,7 +279,7 @@ public class Console extends Fragment implements TextWatcher{
                 }
             }
             for (String s1 : splited) {
-                int i = Integer.parseInt(s1, 16);
+                int i = Integer.parseInt(s1);
                 BlueTooth.Send(i);
             }
             outpustStream.setText(ConvertToDec(false));
@@ -282,6 +299,15 @@ public class Console extends Fragment implements TextWatcher{
             }
             else
                 throw new IllegalArgumentException("bad bin value: " + s);
+        }
+        else if (ASCII){
+            for (int i = 0; i < s.length(); i++){
+                char c = s.charAt(i);
+                int sToSend = c;
+                BlueTooth.Send(sToSend);
+            }
+            dataOUT.add(null);
+            outpustStream.setText(ConvertToAscii(false));
         }
         txtSend.setText("");
     }
@@ -313,6 +339,9 @@ public class Console extends Fragment implements TextWatcher{
         else if (BIN){
             text = ConvertToBIN(true);
         }
+        else if (ASCII){
+            text = ConvertToAscii(true);
+        }
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
@@ -328,25 +357,43 @@ public class Console extends Fragment implements TextWatcher{
         ArrayList<String> poleDat =  (in) ? dataIN : dataOUT;
         String final_string = "";
         for (String s: poleDat) {
-            int dec = Integer.parseInt(s);
-            StringBuilder hexBuilder = new StringBuilder(sizeOfIntInHalfBytes);
-            hexBuilder.setLength(sizeOfIntInHalfBytes);
-            for (int i = sizeOfIntInHalfBytes - 1; i >= 0; --i) {
-                int j = dec & halfByte;
-                hexBuilder.setCharAt(i, hexDigits[j]);
-                dec >>= numberOfBitsInAHalfByte;
+            if (s != null) {
+                int dec = Integer.parseInt(s);
+                StringBuilder hexBuilder = new StringBuilder(sizeOfIntInHalfBytes);
+                hexBuilder.setLength(sizeOfIntInHalfBytes);
+                for (int i = sizeOfIntInHalfBytes - 1; i >= 0; --i) {
+                    int j = dec & halfByte;
+                    hexBuilder.setCharAt(i, hexDigits[j]);
+                    dec >>= numberOfBitsInAHalfByte;
+                }
+                while (true) {
+                    if (!hexBuilder.toString().startsWith("0") || hexBuilder.length() == 1)
+                        break;
+                    hexBuilder.delete(0, 1);
+                }
+                final_string += hexBuilder.toString();
+                final_string += "\n";
             }
-            while (true){
-                if (!hexBuilder.toString().startsWith("0") || hexBuilder.length() == 1)
-                    break;
-                hexBuilder.delete(0,1);
-            }
-            final_string += hexBuilder.toString();
-            final_string += "\n";
         }
         /**vraceni listu do puvodni polohy*/
         Collections.reverse(dataIN);
         Collections.reverse(dataOUT);
+        return final_string;
+    }
+
+    private String ConvertToAscii(boolean in){
+        ArrayList<String> poleDat =  (in) ? dataIN : dataOUT;
+        String final_string = "";
+        for (String s: poleDat) {
+            if (s != null) {
+                int number = Integer.parseInt(s);
+                char c = (char) number;
+                final_string += c;
+            }
+            else {
+                final_string += "\n";
+            }
+        }
         return final_string;
     }
 
@@ -356,7 +403,9 @@ public class Console extends Fragment implements TextWatcher{
         ArrayList<String> poleDat =  (in) ? dataIN : dataOUT;
         String final_string = "";
         for (String s: poleDat) {
-            final_string += s+"\n";
+            if (s != null) {
+                final_string += s + "\n";
+            }
         }
         Collections.reverse(dataIN);
         Collections.reverse(dataOUT);
@@ -369,7 +418,8 @@ public class Console extends Fragment implements TextWatcher{
         ArrayList<String> poleDat =  (in) ? dataIN : dataOUT;
         String final_string = "";
         for (String s: poleDat) {
-            int dec = Integer.parseInt(s);
+            if (s != null) {
+                int dec = Integer.parseInt(s);
             /*if (dec >= 32768){
                 final_string += "Nepodporovaný formát zobrazení pro bin";
             }
@@ -387,8 +437,8 @@ public class Console extends Fragment implements TextWatcher{
                     }
                     final_string += " | ";
                 }*/
-                for (int i = (int) MyMath.expo(2,7); i>0; i-=i/2){
-                    if (i == 8){
+                for (int i = (int) MyMath.expo(2, 7); i > 0; i -= i / 2) {
+                    if (i == 8) {
                         final_string += " ";
                     }
                     final_string = (dec >= i) ? final_string + "1" : final_string + "0";
@@ -396,8 +446,9 @@ public class Console extends Fragment implements TextWatcher{
                     if (i == 1)
                         break;
                 }
-            //}
-            final_string += "\n";
+                //}
+                final_string += "\n";
+            }
         }
         Collections.reverse(dataIN);
         Collections.reverse(dataOUT);

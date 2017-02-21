@@ -412,7 +412,7 @@ public class MainScreen extends AppCompatActivity implements Navigation_Menu_Mai
                     console = new Console();
                     fragmentTransaction = getFragmentManager().beginTransaction().replace(R.id.container, console);
                     fragmentTransaction.commit();
-                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                 }
                 else{
                     consoleRUN = false;

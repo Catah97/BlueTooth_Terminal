@@ -25,7 +25,7 @@ import java.util.Collections;
  */
 public class BlueTooth extends Thread {
 
-    private BluetoothSocket mmSocket;
+    private static BluetoothSocket mmSocket;
     private InputStream mmInStream;
     public static OutputStream mmOutStream;
     private static BlueToothListener blueToothListener;
