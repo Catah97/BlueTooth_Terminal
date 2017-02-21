@@ -17,6 +17,7 @@ import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.ConcurrentModificationException;
 
 /**
  * Created by Martin on 19.08.2015.
@@ -46,23 +47,29 @@ public class BlueTooth extends Thread {
     public void run()
     {
         synchronized (this) {
-            while (!this.isInterrupted()) {
-                try {
-                    int bytesAvailable = mmInStream.available();
-                    if(bytesAvailable > 0)
-                    {
-                        byte[] buffer = new byte[bytesAvailable];
-                        int size = mmInStream.read(buffer);
-                        Log.e("bluetoothReader", "Data size: " + size);
-                        for (byte oneByte : buffer){
-                            if (oneByte != 0) {
-                                blueToothListener.incomingBytes(oneByte);
+            while (!this.isInterrupted() && mmSocket.isConnected()) {
+                if (mmSocket.isConnected()) {
+                    try {
+                        int bytesAvailable = mmInStream.available();
+                        if (bytesAvailable > 0) {
+                            byte[] buffer = new byte[bytesAvailable];
+                            int size = mmInStream.read(buffer);
+                            Log.e("bluetoothReader", "Data size: " + size);
+                            for (byte oneByte : buffer) {
+                                if (oneByte != 0) {
+                                    try {
+                                        blueToothListener.incomingBytes(oneByte);
+                                    } catch (ConcurrentModificationException ex) {
+                                        Log.w("bluetoothReader", "invalide data error", ex);
+                                    }
+                                }
                             }
+
                         }
+                    } catch (IOException e) {
+                        Log.e("bluetoothReader", "error", e);
+                        break;
                     }
-                } catch (IOException e) {
-                    Log.e("bluetoothReader", "error", e);
-                    break;
                 }
             }
         }

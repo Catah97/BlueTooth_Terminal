@@ -443,9 +443,9 @@ public class MainScreen extends AppCompatActivity implements Navigation_Menu_Mai
         if (BlueToothConnection.socket != null) {
             try {
                 blueToothSender.interrupt();
-                blueToothSender.join();
                 pripojeno = false;
                 BlueToothConnection.socket.close();
+                blueToothSender.join(300);
                 Console.dataIN.clear();
                 Console.dataOUT.clear();
                 finish();
@@ -470,11 +470,9 @@ public class MainScreen extends AppCompatActivity implements Navigation_Menu_Mai
 
     @Override
     public void incomingBytes(byte bytes) {
+        Console.SetInputTextStatic(bytes);
         if (consoleRUN){
-            console.SetInputText(bytes);
-        }
-        else {
-            Console.SetInputTextStatic(bytes);
+            console.reDraw();
         }
     }
 }

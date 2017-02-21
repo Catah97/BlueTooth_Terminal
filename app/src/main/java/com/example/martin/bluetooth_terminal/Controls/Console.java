@@ -328,8 +328,7 @@ public class Console extends Fragment implements TextWatcher{
 
     String text;
 
-    public void SetInputText(byte prichozi_zprava){
-        SetInputTextStatic(prichozi_zprava);
+    public void reDraw(){
         if (HEX){
             text = ConvertToHEX(true);
         }
@@ -384,14 +383,26 @@ public class Console extends Fragment implements TextWatcher{
     private String ConvertToAscii(boolean in){
         ArrayList<String> poleDat =  (in) ? dataIN : dataOUT;
         String final_string = "";
+        String text = "";
         for (String s: poleDat) {
             if (s != null) {
                 int number = Integer.parseInt(s);
                 char c = (char) number;
-                final_string += c;
+                if (in) {
+                    final_string += c;
+                }
+                else {
+                    text += c;
+                }
             }
             else {
-                final_string += "\n";
+                if (in) {
+                    final_string += "\n";
+                }
+                else {
+                    final_string = text + "\n" + final_string;
+                    text = "";
+                }
             }
         }
         return final_string;
