@@ -112,6 +112,7 @@ public class Welcome extends Activity implements Animation.AnimationListener{
                 Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.welcom_logo_animation);
                 anim.setStartOffset(3000);
                 img.startAnimation(anim);
+                appName.startAnimation(anim);
                 anim.setAnimationListener(Welcome.this);
                 logoFirma.startAnimation(anim);
             } else {
