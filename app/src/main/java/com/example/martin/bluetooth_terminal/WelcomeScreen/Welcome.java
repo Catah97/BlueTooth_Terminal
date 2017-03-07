@@ -28,7 +28,7 @@ import com.example.martin.bluetooth_terminal.R;
 public class Welcome extends Activity implements Animation.AnimationListener{
 
     final BluetoothAdapter blueTooth = BluetoothAdapter.getDefaultAdapter();
-    TextView text;
+    TextView text, appName;
     LinearLayout enebleBloueTooth;
     RelativeLayout RLTswipe;
 
@@ -56,6 +56,7 @@ public class Welcome extends Activity implements Animation.AnimationListener{
                     img.startAnimation(anim);
                     text.startAnimation(anim);
                     enebleBloueTooth.startAnimation(anim);
+                    appName.startAnimation(anim);
                     anim.setAnimationListener(Welcome.this);
                 }
             });
@@ -93,6 +94,7 @@ public class Welcome extends Activity implements Animation.AnimationListener{
         text = (TextView)findViewById(R.id.txtWelcome);
         RLTswipe = (RelativeLayout) findViewById(R.id.RLTswipe);
         enebleBloueTooth = (LinearLayout) findViewById(R.id.enebla_BlueToothLayout);
+        appName = (TextView) findViewById(R.id.appName);
         swipeView = new SwipeView(this,handler);
         RLTswipe.addView(swipeView);
         RLTswipe.setOnTouchListener(swipeView.swipetouch);

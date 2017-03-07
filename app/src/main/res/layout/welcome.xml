@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/txtWelcome"
+        android:text=""
         android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true"
         android:textColor="#000000" />
@@ -63,6 +64,17 @@
         app:layout_marginTopPercent="20%"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="@string/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtWelcome"
+        android:layout_centerHorizontal="true"
+        android:textSize="25sp"
+        android:layout_marginTop="5dp"
+        android:textColor="#000000"
+        android:id="@+id/appName" />
 
 
 </RelativeLayout>
