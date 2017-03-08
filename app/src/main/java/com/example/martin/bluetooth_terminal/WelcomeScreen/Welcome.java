@@ -28,8 +28,8 @@ import com.example.martin.bluetooth_terminal.R;
 public class Welcome extends Activity implements Animation.AnimationListener{
 
     final BluetoothAdapter blueTooth = BluetoothAdapter.getDefaultAdapter();
-    TextView text, appName;
-    LinearLayout enebleBloueTooth;
+    TextView text;
+    LinearLayout enebleBloueTooth, txtNameLayout;
     RelativeLayout RLTswipe;
 
     SwipeView swipeView;
@@ -56,7 +56,7 @@ public class Welcome extends Activity implements Animation.AnimationListener{
                     img.startAnimation(anim);
                     text.startAnimation(anim);
                     enebleBloueTooth.startAnimation(anim);
-                    appName.startAnimation(anim);
+                    txtNameLayout.startAnimation(anim);
                     anim.setAnimationListener(Welcome.this);
                 }
             });
@@ -94,7 +94,7 @@ public class Welcome extends Activity implements Animation.AnimationListener{
         text = (TextView)findViewById(R.id.txtWelcome);
         RLTswipe = (RelativeLayout) findViewById(R.id.RLTswipe);
         enebleBloueTooth = (LinearLayout) findViewById(R.id.enebla_BlueToothLayout);
-        appName = (TextView) findViewById(R.id.appName);
+        txtNameLayout = (LinearLayout) findViewById(R.id.txtNameLayout);
         swipeView = new SwipeView(this,handler);
         RLTswipe.addView(swipeView);
         RLTswipe.setOnTouchListener(swipeView.swipetouch);
@@ -112,7 +112,7 @@ public class Welcome extends Activity implements Animation.AnimationListener{
                 Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.welcom_logo_animation);
                 anim.setStartOffset(3000);
                 img.startAnimation(anim);
-                appName.startAnimation(anim);
+                txtNameLayout.startAnimation(anim);
                 anim.setAnimationListener(Welcome.this);
                 logoFirma.startAnimation(anim);
             } else {
