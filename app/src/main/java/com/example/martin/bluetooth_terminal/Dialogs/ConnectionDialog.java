@@ -23,7 +23,7 @@ public class ConnectionDialog {
         View rootView = inflater.inflate(R.layout.waitdialog_connection, null);
         TextView text = (TextView) rootView.findViewById(R.id.txtSetDialog);
         text.setText(message);
-        builder.setNegativeButton("Zrušit", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 connection.cancel(true);

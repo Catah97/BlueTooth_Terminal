@@ -21,7 +21,7 @@ import com.example.martin.bluetooth_terminal.R;
 public class RenameDevice {
     public static void Dialog(final Context context, final String id, final Handler handler){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Nastavte jméno");
+        builder.setTitle(R.string.set_name);
         final EditText input = new EditText(context);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -38,7 +38,7 @@ public class RenameDevice {
                 handler.sendMessage(msg);
             }
         });
-        builder.setNegativeButton("Zrušit", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();

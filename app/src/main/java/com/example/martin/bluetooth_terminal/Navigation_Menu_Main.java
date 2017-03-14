@@ -109,13 +109,13 @@ public class Navigation_Menu_Main extends Fragment {
 
     public void SetAdapter (){
         ArrayList<String> seznam = new ArrayList<>();
-        seznam.add("Nastavit oládání");
-        seznam.add("Vytvořit nové ovládání");
+        seznam.add(getString(R.string.set_control));
+        seznam.add(getString(R.string.create_new_control));
         if (MainScreen.consoleRUN)
-            seznam.add("Ovládání");
+            seznam.add(getString(R.string.control));
         else
-            seznam.add("Console");
-        seznam.add("Odpojit");
+            seznam.add(getString(R.string.console));
+        seznam.add(getString(R.string.disconect));
         ArrayAdapter listAdapter = new ArrayAdapter(getActionBar().getThemedContext(), android.R.layout.simple_list_item_1, seznam){
             @Override //nastaveni pisma pro adapter
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -197,7 +197,7 @@ public class Navigation_Menu_Main extends Fragment {
         // showGlobalContextActionBar, which controls the top-left area of the action bar.
         if (mDrawerLayout != null && isDrawerOpen()) {
             ActionBar actionBar = getActionBar();
-            actionBar.setTitle("Připojeno k: "+title);
+            actionBar.setTitle(String.format(getString(R.string.connected_to),title));
         }
         super.onCreateOptionsMenu(menu, inflater);
     }

@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class ChooseTable {
     public static AlertDialog Dialog(final Context context, final Handler handler, final ArrayList<String> data,final ArrayList<String> orientation){
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(context, R.style.CustomDialog));
-        builder.setTitle("Zvolte ovládání:");
+        builder.setTitle(R.string.choose_control);
         final ListView listView = new ListView(new ContextThemeWrapper(context,R.style.CustomDialog));
         ArrayAdapter adapter = new ArrayAdapter(new ContextThemeWrapper(context,R.style.CustomDialog),android.R.layout.simple_list_item_1,data);
         listView.setAdapter(adapter);
@@ -40,7 +40,7 @@ public class ChooseTable {
                 handler.sendMessage(msg);
             }
         });
-        builder.setNegativeButton("Zrušit", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -50,16 +50,17 @@ public class ChooseTable {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
                 AlertDialog.Builder delete = new AlertDialog.Builder(new ContextThemeWrapper(context, R.style.CustomDialog));
-                delete.setTitle("Varování!");
+                delete.setTitle(R.string.waring);
                 final String ovladani = parent.getItemAtPosition(position).toString();
-                delete.setMessage("Opravdu si přejete ovládání " + ovladani + " odstranit?");
-                delete.setPositiveButton("Ano", new DialogInterface.OnClickListener() {
+                String message = String.format(context.getString(R.string.would_you_like_remove_control), ovladani);
+                delete.setMessage(message);
+                delete.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Methody.DeleteTable(context, ovladani, handler);
                     }
                 });
-                delete.setNegativeButton("Ne", new DialogInterface.OnClickListener() {
+                delete.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -77,7 +78,7 @@ public class ChooseTable {
 
     public static AlertDialog DialogChooseMenu(final Context context, final Handler handler, final ArrayList<String> data,final ArrayList<String> orientation){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Zvolte ovládání:");
+        builder.setTitle(R.string.choose_control);
         final ListView listView = new ListView(context);
         ArrayAdapter adapter = new ArrayAdapter(context,android.R.layout.simple_list_item_1,data);
         listView.setAdapter(adapter);
@@ -99,7 +100,7 @@ public class ChooseTable {
                 }
             }
         });
-        builder.setNegativeButton("Zrušit", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -110,16 +111,17 @@ public class ChooseTable {
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
                 if (position != data.size()-1 && data.size() != 2) {
                     AlertDialog.Builder delete = new AlertDialog.Builder(new ContextThemeWrapper(context, R.style.CustomDialog));
-                    delete.setTitle("Varování!");
+                    delete.setTitle(R.string.waring);
                     final String ovladani = parent.getItemAtPosition(position).toString();
-                    delete.setMessage("Opravdu si přejete ovládání " + ovladani + " odstranit?");
-                    delete.setPositiveButton("Ano", new DialogInterface.OnClickListener() {
+                    String message = String.format(context.getString(R.string.would_you_like_remove_control), ovladani);
+                    delete.setMessage(message);
+                    delete.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Methody.DeleteTable(context, ovladani, handler);
                         }
                     });
-                    delete.setNegativeButton("Ne", new DialogInterface.OnClickListener() {
+                    delete.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();

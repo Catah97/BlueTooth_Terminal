@@ -2,17 +2,19 @@
 
 
     <array name="MenuPhotoUncomplete">
-        <item>Najít zařízení</item>
-        <item>Vytvořit první ovládání</item>
+        <item>@string/find_device</item>
+        <item>@string/create_new_control</item>
     </array>
     <array name="MenuPhoto">
-        <item>Najít zařízení</item>
-        <item>Nastavit ovládání</item>
+        <item>@string/find_device</item>
+        <item>@string/set_control</item>
     </array>
 
 
+    <string name="find_device">Najít zařízení</string>
+    <string name="set_control">Nastavit ovládání</string>
 
-    <string name="app_name">BlueTooth_Terminal</string>
+    <string name="app_name">BlueTooth Terminal</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -56,4 +58,93 @@ Zbývající dvě položky "barva textu" a "barva pozadí" slouží k nastavení
         Všechny bajty zadávejte buď jako jeden znak, který bude převeden pomocí ASCI tabulky, HEX (zadáním dvoumístného čisla. např: 0F), a nebo rovnou bytovou hodnotu např: 0010 1010.
         Následující obrázek je s nastavením Počet oblastí 3.
         "</string>
+
+
+    <string name="outcoming_bytes">Odchozí bajty</string>
+    <string name="incoming_bytes">Příchozí bajty (neumí zobrazit 0)</string>
+    <string name="search_device">Hledám zařizeni</string>
+    <string name="save">Uložit</string>
+    <string name="button_text">Text tlačítka:</string>
+    <string name="text_color">Barva textu:</string>
+    <string name="background_color">Barva pozadí:</string>
+    <string name="byteString">Bajt:</string>
+    <string name="number_of_leves">Počet úrovní:</string>
+    <string name="level0">0. úroveň:</string>
+    <string name="level1">1. úroveň:</string>
+    <string name="level2">2. úroveň:</string>
+    <string name="level3">3. úroveň:</string>
+    <string name="level4">4. úroveň:</string>
+    <string name="level5">5. úroveň:</string>
+    <string name="boreder_color">Barva hranic:</string>
+    <string name="color_of_move">Barva posunu:</string>
+    <string name="send_after_change">Posílat při změně</string>
+    <string name="send_allways">Posílat nepřetržitě</string>
+    <string name="switch_on_returning_animation">Zapnout animaci vracení</string>
+    <string name="switch_off_returning_animation">Vypnout animaci vraceni</string>
+    <string name="max_value">Maximální hodnota:</string>
+    <string name="text_of_note">Text poznámky:</string>
+    <string name="text_size">Velikost textu:</string>
+    <string name="value_for_off">Hodnota pro vypnuto.</string>
+    <string name="value_for_on">Hodnota pro zapnuto.</string>
+    <string name="left">Vlevo</string>
+    <string name="right">Vpravo</string>
+    <string name="ahead">Rovně</string>
+    <string name="connecting_to">Připojování k</string>
+    <string name="waiting_please">Čekejte prosím!</string>
+    <string name="clear">Vyčistit</string>
+    <string name="options">Option</string>
+    <string name="information">Informace</string>
+    <string name="starting_bluetooth">Zapinam Bluetooth</string>
+    <string name="bluetooth_not_found">BlueTooth nenalezeno</string>
+    <string name="deleted">Smazáno</string>
+    <string name="create_new_control">Vytvořit nové ovládání</string>
+    <string name="this_name_is_not_allowed">Tento název, nemůžete zadat</string>
+    <string name="waring">Varování</string>
+    <string name="would_you_like_end_app">Přejte si ukončit aplikaci?</string>
+    <string name="no">Ne</string>
+    <string name="yes">Ano</string>
+    <string name="device_cant_be_connect_try_later">Zařízení nebylo připojeno, zkuste to znovu.</string>
+    <string name="choose_device">Vyberte zařízení</string>
+    <string name="bad_value">Špatně zadáná hodnota</string>
+    <string name="button_doesnt_has_any_value">Pro tlačítko nebyla nastavena hodnota.</string>
+    <string name="cancel">Zrušit</string>
+    <string name="choose_control">Zvolte ovládání:</string>
+    <string name="would_you_like_remove_control">Opravdu si přejete ovládání %s odstranit?</string>
+    <string name="you_have_to_set_control">Musíte nastavit olvdání.</string>
+    <string name="put_control_name">Zadejte název ovládání:</string>
+    <string name="you_have_put_banned_word">Zadali jste zakázaný znak ( ; ).</string>
+    <string name="you_have_to_put_just_one_word">Můsíte zadat pouze jedno slovo.</string>
+    <string name="this_control_already_exist">Takto už se jedno ovládání jmenuje.</string>
+    <string name="you_did_not_choose_any_control">Nezvolili jste žádné ovládání.</string>
+    <string name="one_value_has_not_been_set">Jedna z hodnot nebyla nastavena.</string>
+    <string name="set_name">Nastavte jméno</string>
+    <string name="data_has_not_been_saved">Nepodařilo se uložit data.</string>
+    <string name="button">Tlačítko</string>
+    <string name="switchString">Přepínač</string>
+    <string name="seek_bar">Posuvník</string>
+    <string name="note">Poznámku</string>
+    <string name="accelerator">Plyn</string>
+    <string name="steering_wheel">Volant</string>
+    <string name="info_for">Informace pro %s</string>
+    <string name="setting_for_button">Nastavení pro Tlačítko</string>
+    <string name="would_you_like_continue_without_save">Opravdu chcete pokračovate bez uložení?</string>
+    <string name="one_value_has_incorect_setting">Jedna z hodnot nebyla dobře nastavena.</string>
+    <string name="setting_for_power">Nastavení pro Plyn</string>
+    <string name="setting_for_seekbar">Nastavení pro Posuvník</string>
+    <string name="have_to_set_value_large_then_zero">Musíte nastavid hodnotu vetši než nula.</string>
+    <string name="you_have_to_set_some_value">Musíte nastavid nějakou hodnotu.</string>
+    <string name="setting_for_note">Nastavení pro Poznámku</string>
+    <string name="setting_for_switch">Nastavení pro Přepínač</string>
+    <string name="setting_for_steering_wheel">Nastavení pro Volant</string>
+    <string name="would_you_like_save_changes">Přejete se uložit změny?</string>
+    <string name="you_cannot_add_more_theese_items">Bohužel víc těchto prvků už přidat nemůžete.</string>
+    <string name="blouetooth_has_been_disabled">Bluetooth bylo vypnuto</string>
+    <string name="console">Konzole</string>
+    <string name="there_is_no_more_controls">Nejsou k dispozici žádné další ovládání.</string>
+    <string name="would_you_like_dissconect_device">Přejte si se odpojit od zařízení?</string>
+    <string name="Device_has_been_disconected">Zařízení bylo odpojeno</string>
+    <string name="Device_has_not_been_disconected">Zařízení se nepodařilo odpojit.</string>
+    <string name="control">Ovládání</string>
+    <string name="disconect">Odpojit</string>
+    <string name="connected_to">Připojeno k: %s</string>
 </resources>

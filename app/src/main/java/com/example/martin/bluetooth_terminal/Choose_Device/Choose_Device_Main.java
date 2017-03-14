@@ -115,7 +115,7 @@ public class Choose_Device_Main extends AppCompatActivity {
             }
             if (msg.arg1 == Konstanty.DELETE) {
                 dialog.dismiss();
-                Toast.makeText(Choose_Device_Main.this, "Smazáno", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Choose_Device_Main.this, R.string.deleted, Toast.LENGTH_SHORT).show();
                 String tableNames = Save_Load.LoadedData(Choose_Device_Main.this, Konstanty.TABLES_FILE);
                 String orientation = Save_Load.LoadedData(Choose_Device_Main.this,Konstanty.ORIENTATION_FILE);
 
@@ -128,7 +128,7 @@ public class Choose_Device_Main extends AppCompatActivity {
                     listTabulek.add(seznamTabulek[i]);
                     listOrientation.add(seznamOrientation[i]);
                 }
-                listTabulek.add("Vytvořit nové ovládání");
+                listTabulek.add(getString(R.string.create_new_control));
                 dialog = ChooseTable.DialogChooseMenu(Choose_Device_Main.this, tableHandler, listTabulek,listOrientation);
                 dialog.show();
                 try {
@@ -150,7 +150,7 @@ public class Choose_Device_Main extends AppCompatActivity {
                 try {
                     databaOperations.CreateTable();
                 } catch (Exception e) {
-                    Toast.makeText(Choose_Device_Main.this,"Tento název, nemůžete zadat",Toast.LENGTH_LONG).show();
+                    Toast.makeText(Choose_Device_Main.this, R.string.this_name_is_not_allowed,Toast.LENGTH_LONG).show();
                     return;
                 }
                 String readData= Save_Load.LoadedData(Choose_Device_Main.this, Konstanty.TABLES_FILE);
@@ -165,7 +165,7 @@ public class Choose_Device_Main extends AppCompatActivity {
                 try {
                     databaOperations.CreateTable();
                 } catch (Exception e) {
-                    Toast.makeText(Choose_Device_Main.this,"Tento název, nemůžete zadat",Toast.LENGTH_LONG).show();
+                    Toast.makeText(Choose_Device_Main.this,R.string.this_name_is_not_allowed,Toast.LENGTH_LONG).show();
                     /**mažu databazi, aby později nedělala neplechu*/
                     Choose_Device_Main.this.deleteDatabase(Konstanty.MAIN_DATABASE_NAME);
                     return;
@@ -215,7 +215,7 @@ public class Choose_Device_Main extends AppCompatActivity {
                         listTabulek.add(seznamTabulek[i]);
                         listOrientation.add(seznamOrientation[i]);
                     }
-                    listTabulek.add("Vytvořit nové ovládání");
+                    listTabulek.add(getString(R.string.create_new_control));
                     dialog = ChooseTable.DialogChooseMenu(Choose_Device_Main.this, tableHandler, listTabulek,listOrientation);
                     dialog.show();
                     try {
@@ -237,7 +237,7 @@ public class Choose_Device_Main extends AppCompatActivity {
                 return;
             }
             if (msg.arg1 == Konstanty.BLUETOOTH_ASCYTAS_DONE && msg.arg2 == Konstanty.BLUETOOTH_FAIL) {
-                Toast.makeText(getApplicationContext(), "Zařízení nebylo připojeno, zkuste to znovu.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.device_cant_be_connect_try_later, Toast.LENGTH_LONG).show();
                 try {
                     loadingDialog.dismiss();
                 }
@@ -281,15 +281,15 @@ public class Choose_Device_Main extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.CustomDialog));
-            alertDialog.setTitle("Varování");
-            alertDialog.setMessage("Přejte si ukončit aplikaci?");
-            alertDialog.setNegativeButton("Ne", new DialogInterface.OnClickListener() {
+            alertDialog.setTitle(R.string.waring);
+            alertDialog.setMessage(R.string.would_you_like_end_app);
+            alertDialog.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     return;
                 }
             });
-            alertDialog.setPositiveButton("Ano", new DialogInterface.OnClickListener() {
+            alertDialog.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     Choose_Device_Main.this.finish();
                     return;
@@ -359,7 +359,7 @@ public class Choose_Device_Main extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Vyberte zařízení");
+        actionBar.setTitle(R.string.choose_device);
         SimpleAdapter listAdapter = new SimpleAdapter(this, list, android.R.layout.simple_list_item_2, new String[]{jmeno, mac}, new int[]{android.R.id.text1, android.R.id.text2});
         ListView lv = (ListView) findViewById(R.id.deviceSeznam);
         lv.setAdapter(listAdapter);

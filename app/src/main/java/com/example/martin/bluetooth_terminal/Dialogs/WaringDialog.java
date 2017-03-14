@@ -18,9 +18,9 @@ import com.example.martin.bluetooth_terminal.R;
 public class WaringDialog {
     public static void Dialog (Context context, final Handler handler,String text){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Varování");
+        builder.setTitle(R.string.waring);
         builder.setMessage(text);
-        builder.setPositiveButton("Ano", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Message msg = new Message();
@@ -29,7 +29,7 @@ public class WaringDialog {
                 dialog.dismiss();
             }
         });
-        builder.setNegativeButton("Ne", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Message msg = new Message();

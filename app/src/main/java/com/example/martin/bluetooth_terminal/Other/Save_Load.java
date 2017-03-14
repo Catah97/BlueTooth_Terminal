@@ -5,6 +5,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 
+import com.example.martin.bluetooth_terminal.R;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -27,10 +29,10 @@ import java.io.OutputStreamWriter;
                     writer.close();
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Toast.makeText(context, "Nepodařilo se uložit data.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.data_has_not_been_saved, Toast.LENGTH_SHORT).show();
                 }
             } catch (FileNotFoundException e) {
-                Toast.makeText(context, "Nepodařilo se uložit data.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.data_has_not_been_saved , Toast.LENGTH_SHORT).show();
             }
         }
 

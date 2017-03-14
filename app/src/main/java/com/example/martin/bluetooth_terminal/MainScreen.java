@@ -74,7 +74,7 @@ public class MainScreen extends AppCompatActivity implements Navigation_Menu_Mai
                 if (state == BluetoothAdapter.STATE_TURNING_OFF)
                 {
                     Dissconnect();
-                    Toast.makeText(context, "Bluetooth bylo vypnuto", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.blouetooth_has_been_disabled, Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -97,7 +97,7 @@ public class MainScreen extends AppCompatActivity implements Navigation_Menu_Mai
                 try {
                     databaOperations.CreateTable();
                 } catch (Exception e) {
-                    Toast.makeText(MainScreen.this,"Tento název, nemůžete zadat", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainScreen.this, R.string.this_name_is_not_allowed, Toast.LENGTH_LONG).show();
                     return;
                 }
                 String readData= Save_Load.LoadedData(MainScreen.this, Konstanty.TABLES_FILE);
@@ -112,7 +112,7 @@ public class MainScreen extends AppCompatActivity implements Navigation_Menu_Mai
                 try {
                     databaOperations.CreateTable();
                 } catch (Exception e) {
-                    Toast.makeText(MainScreen.this,"Tento název, nemůžete zadat", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainScreen.this, R.string.this_name_is_not_allowed, Toast.LENGTH_LONG).show();
                     /**mažu databazi, aby později nedělala neplechu*/
                     MainScreen.this.deleteDatabase(Konstanty.MAIN_DATABASE_NAME);
                     return;
@@ -139,7 +139,7 @@ public class MainScreen extends AppCompatActivity implements Navigation_Menu_Mai
             }
             if (msg.arg1 == Konstanty.DELETE){
                 menuDialog.dismiss();
-                Toast.makeText(MainScreen.this,"Smazáno",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainScreen.this, R.string.deleted, Toast.LENGTH_SHORT).show();
                 String tableNames = Save_Load.LoadedData(MainScreen.this, Konstanty.TABLES_FILE);
                 String orientation = Save_Load.LoadedData(MainScreen.this,Konstanty.ORIENTATION_FILE);
 
@@ -178,7 +178,7 @@ public class MainScreen extends AppCompatActivity implements Navigation_Menu_Mai
         actionBar.setDisplayHomeAsUpEnabled(true);                  /**zobrazí iconu sipku zpet*/
         actionBar.setHomeButtonEnabled(true);                       /**nastaví iconu eneble pro click*/
         if (consoleRUN) {
-            actionBar.setTitle("Konzole");
+            actionBar.setTitle(R.string.console);
             getMenuInflater().inflate(R.menu.menu_console, menu);
         }
         else {
@@ -223,7 +223,7 @@ public class MainScreen extends AppCompatActivity implements Navigation_Menu_Mai
                 }
             }
             if (listTabulek.size() == 0)
-                Toast.makeText(this, "Nejsou k dispozici žádné další ovládání.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.there_is_no_more_controls, Toast.LENGTH_SHORT).show();
             else {
                 menuDialog = ChooseTable.Dialog(MainScreen.this, handler, listTabulek,listOrientation);
                 menuDialog.show();
@@ -250,14 +250,14 @@ public class MainScreen extends AppCompatActivity implements Navigation_Menu_Mai
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.CustomDialog));
-            alertDialog.setTitle("Varování");
-            alertDialog.setMessage("Přejte si se odpojit od zařízení?");
-            alertDialog.setNegativeButton("Ne", new DialogInterface.OnClickListener() {
+            alertDialog.setTitle(R.string.waring);
+            alertDialog.setMessage(R.string.would_you_like_dissconect_device);
+            alertDialog.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                 }
             });
-            alertDialog.setPositiveButton("Ano", new DialogInterface.OnClickListener() {
+            alertDialog.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     Dissconnect();
                 }
@@ -327,7 +327,7 @@ public class MainScreen extends AppCompatActivity implements Navigation_Menu_Mai
         SetMemu(getIntent().getExtras().getString("device_name"));
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);                       /**zablokování autamitického uspání obrazovky*/
         if (BlueToothConnection.socket == null) {
-            Toast.makeText(this,"Zařízení bylo odpojeno", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.Device_has_been_disconected, Toast.LENGTH_LONG).show();
             finish();
             return;
         }
@@ -451,7 +451,7 @@ public class MainScreen extends AppCompatActivity implements Navigation_Menu_Mai
                 finish();
             } catch (IOException e) {
                 e.printStackTrace();
-                Toast.makeText(getApplicationContext(),"Zařízení se nepodařilo odpojit.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.Device_has_not_been_disconected, Toast.LENGTH_LONG).show();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

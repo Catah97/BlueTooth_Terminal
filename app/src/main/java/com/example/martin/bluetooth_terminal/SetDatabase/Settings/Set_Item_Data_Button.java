@@ -57,7 +57,7 @@ public class Set_Item_Data_Button extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);                  /**zobrazí iconu sipku zpet*/
         actionBar.setHomeButtonEnabled(true);                       /**nastaví iconu eneble pro click*/
-        actionBar.setTitle("Nastavení pro Tlačítko");
+        actionBar.setTitle(R.string.setting_for_button);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -88,7 +88,7 @@ public class Set_Item_Data_Button extends AppCompatActivity {
 
     private void End(){
         if (!save){
-            WaringDialog.Dialog(this, handler,"Opravdu chcete pokračovate bez uložení?");
+            WaringDialog.Dialog(this, handler,getString(R.string.would_you_like_continue_without_save));
         }
         else {
             setResult(RESULT_OK);
@@ -219,7 +219,7 @@ public class Set_Item_Data_Button extends AppCompatActivity {
                     overridePendingTransition(R.animator.set_control_left_in,R.animator.set_control_left_out);
                 }
                 else
-                    Toast.makeText(getApplicationContext(),"Jedna z hodnot nebyla dobře nastavena.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.one_value_has_incorect_setting,Toast.LENGTH_SHORT).show();
             }
         });
     }

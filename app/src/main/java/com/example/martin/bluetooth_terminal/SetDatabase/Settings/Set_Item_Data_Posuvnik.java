@@ -49,7 +49,7 @@ public class Set_Item_Data_Posuvnik extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);                  /**zobrazí iconu sipku zpet*/
         actionBar.setHomeButtonEnabled(true);                       /**nastaví iconu eneble pro click*/
-        actionBar.setTitle("Nastavení pro Posuvník");
+        actionBar.setTitle(R.string.setting_for_seekbar);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -80,7 +80,7 @@ public class Set_Item_Data_Posuvnik extends AppCompatActivity {
 
     private void End(){
         if (!save){
-            WaringDialog.Dialog(this, handler, "Opravdu chcete pokračovate bez uložení?");
+            WaringDialog.Dialog(this, handler, getString(R.string.would_you_like_continue_without_save));
         }
         else {
             setResult(RESULT_OK);
@@ -114,7 +114,7 @@ public class Set_Item_Data_Posuvnik extends AppCompatActivity {
                 String max = txtMax.getText().toString();
                 try {
                     if (Integer.parseInt(max) == 0)
-                        Toast.makeText(Set_Item_Data_Posuvnik.this, "Musíte nastavid hodnotu vetši než nula.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Set_Item_Data_Posuvnik.this, R.string.have_to_set_value_large_then_zero, Toast.LENGTH_SHORT).show();
                     else {
                         databaOperations.UpdatePosuvnik(id, max);
                         setResult(RESULT_OK);
@@ -123,7 +123,7 @@ public class Set_Item_Data_Posuvnik extends AppCompatActivity {
                     }
                 }
                 catch (Exception ignore){
-                    Toast.makeText(Set_Item_Data_Posuvnik.this, "Musíte nastavid nějakou hodnotu.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Set_Item_Data_Posuvnik.this, R.string.you_have_to_set_some_value, Toast.LENGTH_SHORT).show();
                 }
             }
         });

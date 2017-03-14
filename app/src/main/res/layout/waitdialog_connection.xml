@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Připojování k"
+        android:text="@string/connecting_to"
         android:id="@+id/txtViewText"
         android:textColor="#ffffffff"
         android:textSize="20dp"

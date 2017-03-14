@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/option" android:title="Option"
+    <item android:id="@+id/option" android:title="@string/options"
         android:icon="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"
         android:orderInCategory="10" app:showAsAction="always"
         />

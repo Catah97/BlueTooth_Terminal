@@ -67,7 +67,7 @@ public class Welcome extends Activity implements Animation.AnimationListener{
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             blueTooth.enable();
-            text.setText("Zapinam Bluetooth");
+            text.setText(R.string.starting_bluetooth);
             blueToothThread.start();
             swipeView.invalidate();
 
@@ -151,7 +151,7 @@ public class Welcome extends Activity implements Animation.AnimationListener{
     private void SetBluetooth() {
 
         if (blueTooth == null) {
-            Toast.makeText(getApplicationContext(), "BlueTooth nenalezeno", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.bluetooth_not_found, Toast.LENGTH_LONG).show();
             startingBlueTooth = true;
         }
         else if (!blueTooth.isEnabled()) {

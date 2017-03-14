@@ -241,7 +241,7 @@ public class Set_Control extends AppCompatActivity implements Items_menu.Items_m
         } else {
             setResult(RESULT_OK);
             if (!firtStart) {
-                WaringDialog.Dialog(this, handler, "Přejete se uložit změny?");
+                WaringDialog.Dialog(this, handler, getString(R.string.would_you_like_save_changes));
             }
             else
                 finish();
@@ -874,7 +874,7 @@ public class Set_Control extends AppCompatActivity implements Items_menu.Items_m
             });
         }
         catch (Exception ignore){
-            Toast.makeText(Set_Control.this,"Bohužel víc těchto prvků už přidat nemůžete.",Toast.LENGTH_LONG).show();
+            Toast.makeText(Set_Control.this, R.string.you_cannot_add_more_theese_items,Toast.LENGTH_LONG).show();
         }
 
     }

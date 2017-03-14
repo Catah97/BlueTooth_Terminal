@@ -71,7 +71,7 @@ public class Database_name{
 
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Zadejte název ovládání:");
+        builder.setTitle(R.string.put_control_name);
         input.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -100,19 +100,19 @@ public class Database_name{
                 String readData = Save_Load.LoadedData(context, Konstanty.TABLES_FILE);
                 List<String> list = Arrays.asList(readData.split(";"));
                 if (input.getText().length() == 0) {
-                    Toast.makeText(context, "Zadejte název ovládání.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.put_control_name, Toast.LENGTH_SHORT).show();
                 } else if (input.getText().toString().contains(";"))
-                    Toast.makeText(context, "Zadali jste zakázaný znak ( ; ).", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.you_have_put_banned_word, Toast.LENGTH_SHORT).show();
                 else if (input.getText().toString().contains("("))
-                    Toast.makeText(context, "Zadali jste zakázaný znak ( ( ).", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.you_have_put_banned_word, Toast.LENGTH_SHORT).show();
                 else if (input.getText().toString().contains(")"))
-                    Toast.makeText(context, "Zadali jste zakázaný znak ( ) ).", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.you_have_put_banned_word, Toast.LENGTH_SHORT).show();
                 else if (input.getText().toString().contains(" "))
-                    Toast.makeText(context, "Můsíte zadat pouze jedno slovo.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.you_have_to_put_just_one_word, Toast.LENGTH_SHORT).show();
                 else if (list.contains(input.getText().toString()))
-                    Toast.makeText(context, "Takto už se jedno ovládání jmenuje.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.this_control_already_exist, Toast.LENGTH_SHORT).show();
                 else if (!portail && !landspace)
-                    Toast.makeText(context, "Nezvolili jste žádné ovládání.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.you_did_not_choose_any_control, Toast.LENGTH_SHORT).show();
                 else {
                     Message msg = new Message();
                     if (firstRun)

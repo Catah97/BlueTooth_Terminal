@@ -12,7 +12,7 @@ import com.example.martin.bluetooth_terminal.R;
 public class Database_dont_exist {
     public static AlertDialog.Builder Dialog(Context context){
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(context, R.style.CustomDialog));
-        builder.setMessage("Musíte nastavit olvdání.");
+        builder.setMessage(R.string.you_have_to_set_control);
         return builder;
     }
 }

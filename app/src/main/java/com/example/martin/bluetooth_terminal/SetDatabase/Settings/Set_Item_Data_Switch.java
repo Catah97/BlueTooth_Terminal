@@ -53,7 +53,7 @@ public class Set_Item_Data_Switch extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);                  /**zobrazí iconu sipku zpet*/
         actionBar.setHomeButtonEnabled(true);                       /**nastaví iconu eneble pro click*/
-        actionBar.setTitle("Nastavení pro Přepínač");
+        actionBar.setTitle(R.string.setting_for_switch);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -84,7 +84,7 @@ public class Set_Item_Data_Switch extends AppCompatActivity {
 
     private void End(){
         if (!save){
-            WaringDialog.Dialog(this, handler,"Opravdu chcete pokračovate bez uložení?");
+            WaringDialog.Dialog(this, handler, getString(R.string.would_you_like_continue_without_save));
         }
         else {
             setResult(RESULT_OK);
@@ -147,7 +147,7 @@ public class Set_Item_Data_Switch extends AppCompatActivity {
 
                 }
                 else
-                    Toast.makeText(getApplicationContext(), "Jedna z hodnot nebyla dobře nastavena.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),  R.string.one_value_has_incorect_setting, Toast.LENGTH_SHORT).show();
             }
         });
     }

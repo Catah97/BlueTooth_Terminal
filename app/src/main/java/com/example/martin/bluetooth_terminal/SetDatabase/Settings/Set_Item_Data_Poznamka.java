@@ -56,7 +56,7 @@ public class Set_Item_Data_Poznamka extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);                  /**zobrazí iconu sipku zpet*/
         actionBar.setHomeButtonEnabled(true);                       /**nastaví iconu eneble pro click*/
-        actionBar.setTitle("Nastavení pro Poznámku");
+        actionBar.setTitle(R.string.setting_for_note);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -87,7 +87,7 @@ public class Set_Item_Data_Poznamka extends AppCompatActivity {
 
     private void End(){
         if (!save){
-            WaringDialog.Dialog(this, handler,"Opravdu chcete pokračovate bez uložení?");
+            WaringDialog.Dialog(this, handler, getString(R.string.would_you_like_continue_without_save));
         }
         else {
             setResult(RESULT_OK);
@@ -211,7 +211,7 @@ public class Set_Item_Data_Poznamka extends AppCompatActivity {
                     overridePendingTransition(R.animator.set_control_left_in,R.animator.set_control_left_out);
                 }
                 else
-                    Toast.makeText(getApplicationContext(),"Jedna hodnota nebyla nastavena.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.one_value_has_not_been_set,Toast.LENGTH_SHORT).show();
             }
         });
     }

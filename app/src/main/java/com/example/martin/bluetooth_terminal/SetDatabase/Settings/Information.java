@@ -27,8 +27,9 @@ public class Information extends AppCompatActivity {
         super.onCreateOptionsMenu(menu);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);                  /**zobrazí iconu sipku zpet*/
-        actionBar.setHomeButtonEnabled(true);                       /**nastaví iconu eneble pro click*/
-        actionBar.setTitle("Informace pro "+item);
+        actionBar.setHomeButtonEnabled(true);/**nastaví iconu eneble pro click*/
+        String title = String.format(getString(R.string.info_for), item);
+        actionBar.setTitle(title);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -62,33 +63,33 @@ public class Information extends AppCompatActivity {
         item = getIntent().getExtras().getString("item");
 
         if (item.equals(Konstanty.BUTTON)){
-            item = "Tlačítko";
+            item = getString(R.string.button);
             itemText = getString(R.string.buttonInformation);
             img.setImageResource(R.drawable.information_buttton);
 
         }
         if (item.equals(Konstanty.SWITCH)){
-            item = "Přepínač";
+            item = getString(R.string.switchString);
             itemText = getString(R.string.switchInformation);
             img.setImageResource(R.drawable.information_switch);
         }
         if (item.equals(Konstanty.SEEK_BAR)){
-            item = "Posuvník";
+            item = getString(R.string.seek_bar);
             itemText = getString(R.string.seekBarInformation);
             img.setImageResource(R.drawable.information_seekbar);
         }
         if (item.equals(Konstanty.POZNAMKY)){
-            item = "Poznámku";
+            item = getString(R.string.note);
             itemText = getString(R.string.poznamkyInformation);
             img.setImageResource(R.drawable.information_poznamka);
         }
         if (item.equals(Konstanty.PLYN)){
-            item = "Plyn";
+            item = getString(R.string.accelerator);
             itemText = getString(R.string.plynInfomation);
             img.setImageResource(R.drawable.information_plyn);
         }
         if (item.equals(Konstanty.VOLANT)){
-            item = "Volant";
+            item = getString(R.string.steering_wheel);
             itemText = getString(R.string.volantInformation);
             img.setImageResource(R.drawable.information_volant);
         }

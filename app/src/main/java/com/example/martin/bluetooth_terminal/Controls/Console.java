@@ -250,7 +250,7 @@ public class Console extends Fragment implements TextWatcher{
             SendDataOrThrow(text);
         }
         catch (IllegalArgumentException ex){
-            Toast.makeText(context,"Špatně zadáná hodnota",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.bad_value,Toast.LENGTH_SHORT).show();
         }
     }
 

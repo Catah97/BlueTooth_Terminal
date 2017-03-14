@@ -313,7 +313,7 @@ public class Control extends Fragment implements View.OnClickListener,CompoundBu
         Cursor cursor = databaOperations.GetID_Data(String.valueOf(v.getId()));
         cursor.moveToFirst();
         if (cursor.getString(5) == null)
-            Toast.makeText(context, "Pro tlačítko nebyla nastavena hodnota.", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, R.string.button_doesnt_has_any_value, Toast.LENGTH_LONG).show();
         else {
             BlueTooth.Send(cursor.getString(5));
         }

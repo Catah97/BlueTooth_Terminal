@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/information" android:title="Informace"
+    <item android:id="@+id/information" android:title="@string/information"
         android:icon="@mipmap/information"
         android:orderInCategory="1" app:showAsAction="always"
         />

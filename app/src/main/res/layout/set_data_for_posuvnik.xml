@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/textview_size"
-        android:text="Maximální hodnota:"
+        android:text="@string/max_value"
         android:textColor="#000000"
         android:id="@+id/textView11"
         android:layout_centerHorizontal="true"
@@ -38,7 +38,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Uložit"
+        android:text="@string/save"
         android:id="@+id/btnSave"
         android:background="@drawable/oval_background"
         android:layout_alignParentBottom="true"

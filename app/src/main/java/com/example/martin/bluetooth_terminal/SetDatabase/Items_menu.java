@@ -103,12 +103,12 @@ public class Items_menu extends Fragment {
         });
         Log.e("navigation", "view");
         ArrayList<String> seznam = new ArrayList<>();
-        seznam.add("Tlačítko");
-        seznam.add("Přepínač");
-        seznam.add("Posouvač");
-        seznam.add("Poznamky");
-        seznam.add("Volant");
-        seznam.add("Plyn");
+        seznam.add(getString(R.string.button));
+        seznam.add(getString(R.string.switchString));
+        seznam.add(getString(R.string.seek_bar));
+        seznam.add(getString(R.string.note));
+        seznam.add(getString(R.string.steering_wheel));
+        seznam.add(getString(R.string.accelerator));
         ArrayAdapter listAdapter = new ArrayAdapter(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, seznam){
             @Override //nastaveni pisma pro adapter
             public View getView(int position, View convertView, ViewGroup parent) {

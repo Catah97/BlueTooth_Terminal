@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Čekejte prosím!"
+        android:text="@string/waiting_please"
         android:id="@+id/txtViewText"
         android:textColor="#ffffffff"
         android:textSize="22dp"
