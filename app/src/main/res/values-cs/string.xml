@@ -147,4 +147,5 @@ Zbývající dvě položky "barva textu" a "barva pozadí" slouží k nastavení
     <string name="control">Ovládání</string>
     <string name="disconect">Odpojit</string>
     <string name="connected_to">Připojeno k: %s</string>
+    <string name="unsupported">Nepodporováno</string>
 </resources>
