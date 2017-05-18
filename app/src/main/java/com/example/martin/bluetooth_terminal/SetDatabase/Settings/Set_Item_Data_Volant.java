@@ -34,7 +34,7 @@ import com.example.martin.bluetooth_terminal.R;
 /**
  * Created by Martin on 6. 10. 2015.
  */
-public class Set_Item_Data_Volant extends AppCompatActivity {
+public class Set_Item_Data_Volant extends SettingActivity {
 
     boolean save, stillsending,animBack;
     String[] list = new String[]{"1","2","3"};
@@ -69,10 +69,7 @@ public class Set_Item_Data_Volant extends AppCompatActivity {
                 End();
                 break;
             case R.id.information:
-                Intent information = new Intent(this,Information.class);
-                information.putExtra("item",Konstanty.VOLANT);
-                startActivity(information);
-                overridePendingTransition(R.animator.set_control_right_in,R.animator.set_control_right_out);
+                startInfo(Konstanty.VOLANT);
                 break;
         }
         return super.onOptionsItemSelected(item);

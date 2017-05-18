@@ -29,7 +29,7 @@ import com.example.martin.bluetooth_terminal.R;
 /**
  * Created by Martin on 24.12.2015.
  */
-public class Set_Item_Data_Switch extends AppCompatActivity {
+public class Set_Item_Data_Switch extends SettingActivity {
 
 
     boolean save,fail;
@@ -65,10 +65,7 @@ public class Set_Item_Data_Switch extends AppCompatActivity {
                 End();
                 break;
             case R.id.information:
-                Intent information = new Intent(this,Information.class);
-                information.putExtra("item",Konstanty.SWITCH);
-                startActivity(information);
-                overridePendingTransition(R.animator.set_control_right_in,R.animator.set_control_right_out);
+                startInfo(Konstanty.SWITCH);
                 break;
         }
         return super.onOptionsItemSelected(item);

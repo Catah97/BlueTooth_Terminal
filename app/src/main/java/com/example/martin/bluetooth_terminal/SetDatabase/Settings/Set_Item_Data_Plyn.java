@@ -39,7 +39,7 @@ import yuku.ambilwarna.ColorPicker;
 /**
  * Created by Martin on 4. 11. 2015.
  */
-public class Set_Item_Data_Plyn extends AppCompatActivity{
+public class Set_Item_Data_Plyn extends SettingActivity{
 
 
     boolean save,stillsending,animBack;
@@ -78,10 +78,7 @@ public class Set_Item_Data_Plyn extends AppCompatActivity{
                 End();
                 break;
             case R.id.information:
-                Intent information = new Intent(this,Information.class);
-                information.putExtra("item",Konstanty.PLYN);
-                startActivity(information);
-                overridePendingTransition(R.animator.set_control_right_in,R.animator.set_control_right_out);
+                startInfo(Konstanty.PLYN);
                 break;
         }
         return super.onOptionsItemSelected(item);

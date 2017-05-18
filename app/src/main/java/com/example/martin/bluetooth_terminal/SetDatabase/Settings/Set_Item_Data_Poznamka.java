@@ -33,7 +33,7 @@ import yuku.ambilwarna.ColorPicker;
 /**
  * Created by Martin on 25.12.2015.
  */
-public class Set_Item_Data_Poznamka extends AppCompatActivity {
+public class Set_Item_Data_Poznamka extends SettingActivity {
     boolean save;
     ImageView textColor,backgroundColor;
     String id;
@@ -68,10 +68,7 @@ public class Set_Item_Data_Poznamka extends AppCompatActivity {
                 End();
                 break;
             case R.id.information:
-                Intent information = new Intent(this,Information.class);
-                information.putExtra("item",Konstanty.POZNAMKY);
-                startActivity(information);
-                overridePendingTransition(R.animator.set_control_right_in,R.animator.set_control_right_out);
+                startInfo(Konstanty.POZNAMKY);
                 break;
         }
         return super.onOptionsItemSelected(item);
