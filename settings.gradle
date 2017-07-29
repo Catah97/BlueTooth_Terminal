@@ -1,1 +1,1 @@
-include ':app', ':ColorPick'
+include ':BT', ':ColorPick'
