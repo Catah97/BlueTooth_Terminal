@@ -83,7 +83,7 @@ public class DrawVolant extends View  {
         canvas.save(Canvas.MATRIX_SAVE_FLAG); //Saving the canvas and later restoring it so only this image will be rotated.
         canvas.rotate(uhel,Sx, Sy);
         canvas.drawBitmap(volant, drawRect, dest, p);
-        TakeData();
+        //TakeData();
         if (draw < 10)
             draw++;
     }
