@@ -25,7 +25,7 @@ import com.example.martin.bluetooth_terminal.R;
  * Created by Martin on 18.08.2015.
  * Uvodní activita, ověří jeslti je zapnuté bluetooth a když neni tak vyzve uživatele k jeho zapnutí
  */
-public class Welcome extends Activity implements Animation.AnimationListener{
+public class Welcome extends Activity implements Animation.AnimationListener, SwipeViewListener{
 
     final BluetoothAdapter blueTooth = BluetoothAdapter.getDefaultAdapter();
     TextView text;
@@ -62,17 +62,6 @@ public class Welcome extends Activity implements Animation.AnimationListener{
             });
         }
     };
-    Handler handler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            blueTooth.enable();
-            text.setText(R.string.starting_bluetooth);
-            blueToothThread.start();
-            swipeView.invalidate();
-
-        }
-    };
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -95,7 +84,7 @@ public class Welcome extends Activity implements Animation.AnimationListener{
         RLTswipe = (RelativeLayout) findViewById(R.id.RLTswipe);
         enebleBloueTooth = (LinearLayout) findViewById(R.id.enebla_BlueToothLayout);
         txtNameLayout = (LinearLayout) findViewById(R.id.txtNameLayout);
-        swipeView = new SwipeView(this,handler);
+        swipeView = new SwipeView(this, this);
         RLTswipe.addView(swipeView);
         RLTswipe.setOnTouchListener(swipeView.swipetouch);
         Start();
@@ -174,5 +163,13 @@ public class Welcome extends Activity implements Animation.AnimationListener{
     @Override
     public void onAnimationRepeat(Animation animation) {
 
+    }
+
+    @Override
+    public void onSwipe() {
+        blueTooth.enable();
+        text.setText(R.string.starting_bluetooth);
+        blueToothThread.start();
+        swipeView.invalidate();
     }
 }

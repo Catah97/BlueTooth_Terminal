@@ -24,7 +24,7 @@ public class SwipeView extends View{
     final Drawable touchpoint,border;
     Paint textOnSwippe,textOnEnd;
 
-    final Handler handler;
+    final SwipeViewListener swipeViewListener;
     private int viewWidth, viewHeight;
     final int width,height;
     private boolean starBlueTooth;
@@ -33,9 +33,9 @@ public class SwipeView extends View{
     GestureDetector gestureDetector;
 
 
-    public SwipeView(Context context,Handler handler) {
+    public SwipeView(Context context,SwipeViewListener swipeViewListener) {
         super(context);
-        this.handler = handler;
+        this.swipeViewListener = swipeViewListener;
         gestureDetector = new GestureDetector(context, new SingleTapConfirm());
         scale = getResources().getDisplayMetrics().density;
         textOnSwippe = new Paint();
@@ -93,7 +93,7 @@ public class SwipeView extends View{
                         if (starBlueTooth) {
                             x = viewWidth - width;
                             invalidate();
-                            handler.sendEmptyMessage(10);
+                            swipeViewListener.onSwipe();
                             return false;
                         } else {
                             touchX = posun = 0;
@@ -119,7 +119,7 @@ public class SwipeView extends View{
     private class SingleTapConfirm extends GestureDetector.SimpleOnGestureListener {
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
-            handler.sendEmptyMessage(10);
+            swipeViewListener.onSwipe();
             x = viewWidth-width;
             invalidate();
             return true;
