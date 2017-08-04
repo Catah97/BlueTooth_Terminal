@@ -167,9 +167,14 @@ public class Welcome extends Activity implements Animation.AnimationListener, Sw
 
     @Override
     public void onSwipe() {
-        blueTooth.enable();
-        text.setText(R.string.starting_bluetooth);
-        blueToothThread.start();
-        swipeView.invalidate();
+        try {
+            blueTooth.enable();
+            text.setText(R.string.starting_bluetooth);
+            blueToothThread.start();
+            swipeView.invalidate();
+        }
+        catch (IllegalThreadStateException ex){
+            Log.e("Welcome", "onSwipe error");
+        }
     }
 }

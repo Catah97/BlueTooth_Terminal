@@ -1,3 +1,6 @@
+-renamesourcefileattribute SourceFile
+-keepattributes SourceFile,LineNumberTable
+
 -keep class android.**  { *; }
 -dontwarn android.**
 

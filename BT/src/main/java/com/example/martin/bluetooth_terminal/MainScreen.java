@@ -326,12 +326,13 @@ public class MainScreen extends AppCompatActivity implements Navigation_Menu_Mai
         setOrientation();
         SetMemu(getIntent().getExtras().getString("device_name"));
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);                       /**zablokování autamitického uspání obrazovky*/
-        if (BlueToothConnection.socket == null) {
+        try {
+            blueToothSender = new BlueTooth(BlueToothConnection.socket, this);
+        } catch (NullPointerException ex){
             Toast.makeText(this, R.string.Device_has_been_disconected, Toast.LENGTH_LONG).show();
             finish();
             return;
         }
-        blueToothSender = new BlueTooth(BlueToothConnection.socket, this);
         blueToothSender.start();
         final FrameLayout layout = (FrameLayout) findViewById(R.id.container);
         final ViewTreeObserver vto = layout.getViewTreeObserver();
