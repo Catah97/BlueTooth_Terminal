@@ -7,8 +7,8 @@ android {
         applicationId 'appforceone.bluetooth_terminal'
         minSdkVersion 14
         targetSdkVersion 23
-        versionCode 12
-        versionName "1.11"
+        versionCode 13
+        versionName "1.12"
     }
     buildTypes {
         release {
