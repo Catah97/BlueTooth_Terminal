@@ -40,8 +40,13 @@ public class BlueToothConnection extends AsyncTask<String,Void,Void>{
         if (Build.VERSION.SDK_INT < 15)                            /**plati pro APi LV 15 aplikace se pripoji pouze k auticku*/
             uuid = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
         else {
-            ParcelUuid[] uuids = device.getUuids();
-            uuid = uuids[0].getUuid();
+            try {
+                ParcelUuid[] uuids = device.getUuids();
+                uuid = uuids[0].getUuid();
+            }
+            catch (NullPointerException e){
+                uuid = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
+            }
         }
         Log.e("UUID", uuid.toString());
         try {
